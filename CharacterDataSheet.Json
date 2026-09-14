@@ -1,0 +1,21 @@
+{
+    "Units":[
+        {
+           "UnitWalkFrames":12,
+           "UnitAtkFrames":5,
+           "UnitSpeed":5,
+           "UnitRange":200,
+           "UnitSize":30
+
+        }
+    ],
+    "Enemy":[
+        {
+           "EnemyWalkFrames":12,
+           "EnemyAtkFrames":5,
+           "EnemySpeed":5,
+           "EnemyRange":20,
+           "EnemySize":20 
+        }
+    ]
+}
