@@ -23,3 +23,7 @@ def Draw(screen,data,UnitX,UnitType,UnitAnimation,EnemyX,UnitY,EnemyY,EnemyType,
         if EnemyX[i] < WIDTH:
             
             pygame.draw.rect(screen,BLACK,(EnemyX[i],EnemyY - data["Enemy"][EnemyType[i]]["EnemySize"],data["Enemy"][EnemyType[i]]["EnemySize"],data["Enemy"][EnemyType[i]]["EnemySize"]))
+
+
+def DrawButtons(screen,UnitButton,UnitButtonSetup):
+    screen.blit(UnitButtonSetup[0], (100,100))
