@@ -1,21 +1,36 @@
 {
     "Units":[
         {
-           "UnitWalkFrames":12,
-           "UnitAtkFrames":5,
-           "UnitSpeed":5,
-           "UnitRange":200,
-           "UnitSize":30
+            "UnitHealth":100,
+            "UnitWalkFrames":12,
+            "UnitAtkFrames":5,
+            "UnitSpeed":5,
+            "UnitRange":200,
+            "UnitSize":40,
+            "UnitBlindspot":0,
+            "UnitPierce":0,
+            "UnitCooldown":3,
+            "UnitAtkCooldown":1,
+            "UnitPrice":10,
+            "UnitDamage":10
+           
 
         }
     ],
     "Enemy":[
         {
-           "EnemyWalkFrames":12,
-           "EnemyAtkFrames":5,
-           "EnemySpeed":5,
-           "EnemyRange":20,
-           "EnemySize":20 
+            "EnemyHealth":100,
+            "EnemyWalkFrames":12,
+            "EnemyAtkFrames":5,
+            "EnemySpeed":5,
+            "EnemyRange":400,
+            "EnemySize":50, 
+            "EnemyBlindspot":0,
+            "EnemyPierce":0,
+            "EnemyCooldown":3,
+            "EnemyAtkCooldown":1,
+            "EnemyPrice":10,
+            "EnemyDamage":10
         }
     ]
 }
