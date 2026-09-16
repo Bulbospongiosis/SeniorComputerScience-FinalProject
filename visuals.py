@@ -28,34 +28,34 @@ def Draw(screen,data,UnitX,UnitType,UnitAnimation,EnemyX,UnitY,EnemyY,EnemyType,
 def DrawButtons(screen,UnitButton,UnitButtonSetup,ButtonError,Cooldown,data,FrameRate,AssignedButtonTypes):
     for i in range(5):
         if ButtonError[i] == False:
-            screen.blit(UnitButtonSetup[i], (125 + (200 * i),50))
+            screen.blit(UnitButtonSetup[i], (100 + (150 * i),500 + 25))
         else:
-            screen.blit(tint_image_red(UnitButtonSetup[i],0.6), (125 + (200 * i),50))
+            screen.blit(tint_image_red(UnitButtonSetup[i],0.6), (100 + (150 * i),500 + 25))
 
         if ButtonError[i+5] == False:
-            screen.blit(UnitButtonSetup[i+5], (125 + (200 * i),175))
+            screen.blit(UnitButtonSetup[i+5], (100 + (150 * i),600 + 25))
         else:
-            screen.blit(tint_image_red(UnitButtonSetup[i+5],0.6), (125 + (200 * i),175))
+            screen.blit(tint_image_red(UnitButtonSetup[i+5],0.6), (100 + (150 * i),600 + 25))
         if Cooldown[i] < data["Units"][AssignedButtonTypes[i]]["UnitCooldown"] * FrameRate:
-            full_overlay = pygame.Surface((200, 125), pygame.SRCALPHA)
+            full_overlay = pygame.Surface((150, 100), pygame.SRCALPHA)
             full_overlay.fill((0, 0, 0, 100))  # Adjust alpha (e.g., 100) for desired transparency
-            screen.blit(full_overlay, (125 + (200 * i), 50))
+            screen.blit(full_overlay, (100 + (150 * i), 500 + 25))
 
-            width = int(200 * Cooldown[i] / (data["Units"][AssignedButtonTypes[i]]["UnitCooldown"] * FrameRate))
-            cooldown_surface = pygame.Surface((width, 125), pygame.SRCALPHA)
+            width = int(150 * Cooldown[i] / (data["Units"][AssignedButtonTypes[i]]["UnitCooldown"] * FrameRate))
+            cooldown_surface = pygame.Surface((width, 100), pygame.SRCALPHA)
             cooldown_surface.fill((0, 0, 0, 128))  # Semi-transparent black
-            screen.blit(cooldown_surface, (125 + (200 * i), 50))
+            screen.blit(cooldown_surface, (100 + (250 * i), 500 + 25))
 
         # For the second button group (i+5)
         if Cooldown[i+5] < data["Units"][AssignedButtonTypes[i+5]]["UnitCooldown"] * FrameRate:
-            full_overlay = pygame.Surface((200, 125), pygame.SRCALPHA)
+            full_overlay = pygame.Surface((150, 100), pygame.SRCALPHA)
             full_overlay.fill((0, 0, 0, 100))  
-            screen.blit(full_overlay, (125 + (200 * i), 175))
+            screen.blit(full_overlay, (100 + (150 * i), 600 + 25))
 
-            width = int(200 * Cooldown[i+5] / (data["Units"][AssignedButtonTypes[i+5]]["UnitCooldown"] * FrameRate))
-            cooldown_surface = pygame.Surface((width, 125), pygame.SRCALPHA)
+            width = int(150 * Cooldown[i+5] / (data["Units"][AssignedButtonTypes[i+5]]["UnitCooldown"] * FrameRate))
+            cooldown_surface = pygame.Surface((width, 100), pygame.SRCALPHA)
             cooldown_surface.fill((0, 0, 0, 128))  # Semi-transparent black
-            screen.blit(cooldown_surface, (125 + (200 * i), 175))
+            screen.blit(cooldown_surface, (100 + (150 * i), 600 + 25))
 def tint_image_red(image_surface, tint_intensity):
 
     tinted = image_surface.copy()

@@ -31,17 +31,17 @@ ORANGE = (255, 165, 0)
 FrameRate = 60
 
 UnitCount = 50
-UnitY = HEIGHT - 25
+UnitY = HEIGHT - 250
 UnitX = [0] * UnitCount
 UnitType = [0] * UnitCount
 UnitAnimation = [1] * UnitCount
 Cooldown = [999999999999999999] * 10
-AssignedButtonTypes = [1] * 10
+AssignedButtonTypes = [1,1,1,1,1,1,1,0,0,0]
 ButtonError = [False] * 10
 ErrorCooldown = [0] * 10
 
 EnemyCount = 50
-EnemyY = HEIGHT - 25
+EnemyY = HEIGHT - 250
 EnemyX = [WIDTH] * EnemyCount
 EnemyType = [0] * EnemyCount
 EnemyAnimation = [1] * EnemyCount
@@ -59,26 +59,26 @@ NextAvailableEnemy = 0
 
 #images
 
-UnitButtonSetup = [pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (200, 125)),
-                   pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (200, 125)),
-                   pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (200, 125)),
-                   pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (200, 125)),
-                   pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (200, 125)),
-                   pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (200, 125)),
-                   pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (200, 125)),
-                   pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (200, 125)),
-                   pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (200, 125)),
-                   pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (200, 125)),]
-UnitButton = [UnitButtonSetup[0].get_rect(topleft=(125, 50)),
-              UnitButtonSetup[0].get_rect(topleft=(325, 50)),
-              UnitButtonSetup[0].get_rect(topleft=(525, 50)),
-              UnitButtonSetup[0].get_rect(topleft=(725, 50)),
-              UnitButtonSetup[0].get_rect(topleft=(925, 50)),
-              UnitButtonSetup[0].get_rect(topleft=(125, 175)),
-              UnitButtonSetup[0].get_rect(topleft=(325, 175)),
-              UnitButtonSetup[0].get_rect(topleft=(525, 175)),
-              UnitButtonSetup[0].get_rect(topleft=(725, 175)),
-              UnitButtonSetup[0].get_rect(topleft=(925, 175))
+UnitButtonSetup = [pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (150, 100)),
+                   pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (150, 100)),
+                   pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (150, 100)),
+                   pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (150, 100)),
+                   pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (150, 100)),
+                   pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (150, 100)),
+                   pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (150, 100)),
+                   pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (150, 100)),
+                   pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (150, 100)),
+                   pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (150, 100)),]
+UnitButton = [UnitButtonSetup[0].get_rect(topleft=(100 + 25, 500 + 25)),
+              UnitButtonSetup[0].get_rect(topleft=(250 + 25, 500 + 25)),
+              UnitButtonSetup[0].get_rect(topleft=(400 + 25, 500 + 25)),
+              UnitButtonSetup[0].get_rect(topleft=(550 + 25, 500 + 25)),
+              UnitButtonSetup[0].get_rect(topleft=(700 + 25, 500 + 25)),
+              UnitButtonSetup[0].get_rect(topleft=(100 + 25, 600 + 25)),
+              UnitButtonSetup[0].get_rect(topleft=(250 + 25, 600 + 25)),
+              UnitButtonSetup[0].get_rect(topleft=(400 + 25, 600 + 25)),
+              UnitButtonSetup[0].get_rect(topleft=(550 + 25, 600 + 25)),
+              UnitButtonSetup[0].get_rect(topleft=(700 + 25, 600 + 25))
               ]
 
 
