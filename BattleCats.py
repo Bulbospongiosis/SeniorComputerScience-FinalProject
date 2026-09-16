@@ -84,10 +84,10 @@ UnitButton = [UnitButtonSetup[0].get_rect(topleft=(125, 50)),
 
 
 
-def Button(position):
+def Button(position,numberclicked,unicode):
     global UnitX, NextAvailableUnit, UnitButton, Cooldown, data, AssignedButtonTypes, FrameRate, Money, ButtonError, ErrorCooldown
     for i in range(len(UnitButton)):
-        if ErrorCooldown[i] <= 0 and UnitButton[i].collidepoint(position) and Cooldown[i] >= data["Units"][AssignedButtonTypes[i]]["UnitCooldown"] * FrameRate and UnitX[NextAvailableUnit] == 0 and Money >= data["Units"][AssignedButtonTypes[i]]["UnitPrice"]:
+        if ErrorCooldown[i] <= 0 and (UnitButton[i].collidepoint(position) or (numberclicked and (unicode -1 == i or unicode + 9 == i))) and Cooldown[i] >= data["Units"][AssignedButtonTypes[i]]["UnitCooldown"] * FrameRate and UnitX[NextAvailableUnit] == 0 and Money >= data["Units"][AssignedButtonTypes[i]]["UnitPrice"]:
             UnitX[NextAvailableUnit] = 1
             UnitType[NextAvailableUnit] = AssignedButtonTypes[i]
             Cooldown[i] = 0
@@ -99,7 +99,7 @@ def Button(position):
                 else:
                     NextAvailableUnit += 1
         else:
-            if UnitButton[i].collidepoint(position):
+            if (UnitButton[i].collidepoint(position) or (numberclicked and (unicode -1 == i or unicode + 9 == i))):
                 ButtonError[i] = True
                 ErrorCooldown[i] = 0.15 * FrameRate
                 
@@ -125,7 +125,10 @@ while running:
         if event.type == pygame.QUIT:
             running = False
         if event.type == pygame.MOUSEBUTTONUP:
-            Button(pygame.mouse.get_pos())
+            Button(pygame.mouse.get_pos(),False,-1000)
+        if event.type == pygame.KEYDOWN:
+            if event.unicode.isdigit():
+                Button((-100,-100),True,int(event.unicode))
 
 
     UnitOperations(UnitCount,UnitX,data,UnitType,UnitAnimation,FrameRate,EnemyCount,EnemyX)
