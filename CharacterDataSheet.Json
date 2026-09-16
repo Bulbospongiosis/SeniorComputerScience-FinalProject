@@ -1,6 +1,7 @@
 {
     "Units":[
-        {
+        { 
+            "Name": "Base",
             "UnitHealth":100,
             "UnitWalkFrames":12,
             "UnitAtkFrames":5,
@@ -12,6 +13,23 @@
             "UnitCooldown":3,
             "UnitAtkCooldown":1,
             "UnitPrice":10,
+            "UnitDamage":10
+           
+
+        },
+        {
+            "Name": "Base 2",
+            "UnitHealth":100,
+            "UnitWalkFrames":12,
+            "UnitAtkFrames":5,
+            "UnitSpeed":5,
+            "UnitRange":200,
+            "UnitSize":20,
+            "UnitBlindspot":0,
+            "UnitPierce":0,
+            "UnitCooldown":10,
+            "UnitAtkCooldown":1,
+            "UnitPrice":100,
             "UnitDamage":10
            
 

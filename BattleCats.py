@@ -36,7 +36,9 @@ UnitX = [0] * UnitCount
 UnitType = [0] * UnitCount
 UnitAnimation = [1] * UnitCount
 Cooldown = [999999999999999999] * 10
-AssignedButtonTypes = [0] * 10
+AssignedButtonTypes = [1] * 10
+ButtonError = [False] * 10
+ErrorCooldown = [0] * 10
 
 EnemyCount = 50
 EnemyY = HEIGHT - 25
@@ -57,30 +59,61 @@ NextAvailableEnemy = 0
 
 #images
 
-UnitButtonSetup = [pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (100, 108))]
-UnitButton = [UnitButtonSetup[0].get_rect(topleft=(100, 100))]
+UnitButtonSetup = [pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (200, 125)),
+                   pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (200, 125)),
+                   pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (200, 125)),
+                   pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (200, 125)),
+                   pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (200, 125)),
+                   pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (200, 125)),
+                   pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (200, 125)),
+                   pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (200, 125)),
+                   pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (200, 125)),
+                   pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (200, 125)),]
+UnitButton = [UnitButtonSetup[0].get_rect(topleft=(125, 50)),
+              UnitButtonSetup[0].get_rect(topleft=(325, 50)),
+              UnitButtonSetup[0].get_rect(topleft=(525, 50)),
+              UnitButtonSetup[0].get_rect(topleft=(725, 50)),
+              UnitButtonSetup[0].get_rect(topleft=(925, 50)),
+              UnitButtonSetup[0].get_rect(topleft=(125, 175)),
+              UnitButtonSetup[0].get_rect(topleft=(325, 175)),
+              UnitButtonSetup[0].get_rect(topleft=(525, 175)),
+              UnitButtonSetup[0].get_rect(topleft=(725, 175)),
+              UnitButtonSetup[0].get_rect(topleft=(925, 175))
+              ]
 
 
 
 
 def Button(position):
-    global UnitX, NextAvailableUnit, UnitButton, Cooldown, data, AssignedButtonTypes, FrameRate
+    global UnitX, NextAvailableUnit, UnitButton, Cooldown, data, AssignedButtonTypes, FrameRate, Money, ButtonError, ErrorCooldown
     for i in range(len(UnitButton)):
-        if UnitButton[i].collidepoint(position) and Cooldown[i] >= data["Units"][AssignedButtonTypes[i]]["UnitCooldown"] * FrameRate and UnitX[NextAvailableUnit] == 0:
+        if ErrorCooldown[i] <= 0 and UnitButton[i].collidepoint(position) and Cooldown[i] >= data["Units"][AssignedButtonTypes[i]]["UnitCooldown"] * FrameRate and UnitX[NextAvailableUnit] == 0 and Money >= data["Units"][AssignedButtonTypes[i]]["UnitPrice"]:
             UnitX[NextAvailableUnit] = 1
+            UnitType[NextAvailableUnit] = AssignedButtonTypes[i]
             Cooldown[i] = 0
             NextAvailableUnit = 0
+            Money -= data["Units"][AssignedButtonTypes[i]]["UnitPrice"]
             while True:
                 if UnitX[NextAvailableUnit] == 0:
                     break
                 else:
                     NextAvailableUnit += 1
+        else:
+            if UnitButton[i].collidepoint(position):
+                ButtonError[i] = True
+                ErrorCooldown[i] = 0.15 * FrameRate
+                
 
 
 def Cooldowns():
-    global Cooldown
+    global Cooldown, Money, data, AssignedButtonTypes, ButtonError, FrameRate
+    Money += 200/FrameRate
     for i in range(len(Cooldown)):
         Cooldown[i] += 1
+        if ButtonError[i] == True:
+            ErrorCooldown[i] -= 1
+            if ErrorCooldown[i] <= 0:
+                ButtonError[i] = False
     
 
     
@@ -98,7 +131,7 @@ while running:
     UnitOperations(UnitCount,UnitX,data,UnitType,UnitAnimation,FrameRate,EnemyCount,EnemyX)
     EnemyOperations(EnemyCount,EnemyX,data,EnemyType,EnemyAnimation,FrameRate,UnitCount,UnitX)
     Draw(screen,data,UnitX,UnitType,UnitAnimation,EnemyX,UnitY,EnemyY,EnemyType,UnitCount,EnemyCount)
-    DrawButtons(screen,UnitButton,UnitButtonSetup)
+    DrawButtons(screen,UnitButton,UnitButtonSetup,ButtonError,Cooldown,data,FrameRate,AssignedButtonTypes)
     Cooldowns()
     keys = pygame.key.get_pressed()
     pygame.display.flip()
