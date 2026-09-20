@@ -4,7 +4,7 @@ import sys
 import math
 import json
 from logic import UnitOperations, EnemyOperations
-from visuals import Draw, DrawButtons
+from visuals import Draw, DrawButtons, textplacement
 
 
 with open("CharacterDataSheet.json", "r") as file:
@@ -31,7 +31,7 @@ ORANGE = (255, 165, 0)
 FrameRate = 60
 
 UnitCount = 50
-UnitY = HEIGHT - 250
+UnitY = HEIGHT - 275
 UnitX = [0] * UnitCount
 UnitType = [0] * UnitCount
 UnitAnimation = [1] * UnitCount
@@ -39,9 +39,11 @@ Cooldown = [999999999999999999] * 10
 AssignedButtonTypes = [1,1,1,1,1,1,1,0,0,0]
 ButtonError = [False] * 10
 ErrorCooldown = [0] * 10
+JewButtonError = False
+JewErrorCooldown = 0
 
 EnemyCount = 50
-EnemyY = HEIGHT - 250
+EnemyY = HEIGHT - 275
 EnemyX = [WIDTH] * EnemyCount
 EnemyType = [0] * EnemyCount
 EnemyAnimation = [1] * EnemyCount
@@ -50,6 +52,9 @@ EnemyAnimation = [1] * EnemyCount
 EnemyX[0] = WIDTH - 1
 
 Money = 0
+BaseMoneySpeed = 170
+MoneyLimit = 4500
+JewButtonLevel = 1
 
 NextAvailableUnit = 0
 NextAvailableEnemy = 0
@@ -58,7 +63,8 @@ NextAvailableEnemy = 0
 
 
 #images
-
+JewButtonSetup = pygame.transform.scale(pygame.image.load('__Pngs__/JewButton.png').convert_alpha(), (240, 240))
+JewButton = JewButtonSetup.get_rect(topleft=(900,500))
 UnitButtonSetup = [pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (150, 100)),
                    pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (150, 100)),
                    pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (150, 100)),
@@ -69,23 +75,23 @@ UnitButtonSetup = [pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').
                    pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (150, 100)),
                    pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (150, 100)),
                    pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (150, 100)),]
-UnitButton = [UnitButtonSetup[0].get_rect(topleft=(100 + 25, 500 + 25)),
-              UnitButtonSetup[0].get_rect(topleft=(250 + 25, 500 + 25)),
-              UnitButtonSetup[0].get_rect(topleft=(400 + 25, 500 + 25)),
-              UnitButtonSetup[0].get_rect(topleft=(550 + 25, 500 + 25)),
-              UnitButtonSetup[0].get_rect(topleft=(700 + 25, 500 + 25)),
-              UnitButtonSetup[0].get_rect(topleft=(100 + 25, 600 + 25)),
-              UnitButtonSetup[0].get_rect(topleft=(250 + 25, 600 + 25)),
-              UnitButtonSetup[0].get_rect(topleft=(400 + 25, 600 + 25)),
-              UnitButtonSetup[0].get_rect(topleft=(550 + 25, 600 + 25)),
-              UnitButtonSetup[0].get_rect(topleft=(700 + 25, 600 + 25))
+UnitButton = [UnitButtonSetup[AssignedButtonTypes[0]].get_rect(topleft=(100 + 25, 500 + 25)),
+              UnitButtonSetup[AssignedButtonTypes[1]].get_rect(topleft=(250 + 25, 500 + 25)),
+              UnitButtonSetup[AssignedButtonTypes[2]].get_rect(topleft=(400 + 25, 500 + 25)),
+              UnitButtonSetup[AssignedButtonTypes[3]].get_rect(topleft=(550 + 25, 500 + 25)),
+              UnitButtonSetup[AssignedButtonTypes[4]].get_rect(topleft=(700 + 25, 500 + 25)),
+              UnitButtonSetup[AssignedButtonTypes[5]].get_rect(topleft=(100 + 25, 600 + 25)),
+              UnitButtonSetup[AssignedButtonTypes[6]].get_rect(topleft=(250 + 25, 600 + 25)),
+              UnitButtonSetup[AssignedButtonTypes[7]].get_rect(topleft=(400 + 25, 600 + 25)),
+              UnitButtonSetup[AssignedButtonTypes[8]].get_rect(topleft=(550 + 25, 600 + 25)),
+              UnitButtonSetup[AssignedButtonTypes[9]].get_rect(topleft=(700 + 25, 600 + 25))
               ]
 
 
 
 
 def Button(position,numberclicked,unicode):
-    global UnitX, NextAvailableUnit, UnitButton, Cooldown, data, AssignedButtonTypes, FrameRate, Money, ButtonError, ErrorCooldown
+    global JewButtonError, JewButtonLevel, JewButton, JewErrorCooldown, UnitX, NextAvailableUnit, UnitButton, Cooldown, data, AssignedButtonTypes, FrameRate, Money, ButtonError, ErrorCooldown, MoneyLimit
     for i in range(len(UnitButton)):
         if ErrorCooldown[i] <= 0 and (UnitButton[i].collidepoint(position) or (numberclicked and (unicode -1 == i or unicode + 9 == i))) and Cooldown[i] >= data["Units"][AssignedButtonTypes[i]]["UnitCooldown"] * FrameRate and UnitX[NextAvailableUnit] == 0 and Money >= data["Units"][AssignedButtonTypes[i]]["UnitPrice"]:
             UnitX[NextAvailableUnit] = 1
@@ -102,18 +108,35 @@ def Button(position,numberclicked,unicode):
             if (UnitButton[i].collidepoint(position) or (numberclicked and (unicode -1 == i or unicode + 9 == i))):
                 ButtonError[i] = True
                 ErrorCooldown[i] = 0.15 * FrameRate
+    if JewButton.collidepoint(position) and Money >= MoneyLimit - 1500 and JewButtonLevel < 8:
+        Money -= MoneyLimit - 1500
+        MoneyLimit += 1500
+        JewButtonLevel += 1
+    else:
+        if JewButton.collidepoint(position):
+            JewButtonError = True
+            JewErrorCooldown = 0.15 * FrameRate
+
+
                 
 
 
 def Cooldowns():
-    global Cooldown, Money, data, AssignedButtonTypes, ButtonError, FrameRate
-    Money += 200/FrameRate
+    global Cooldown, Money, data, AssignedButtonTypes, ButtonError, FrameRate, JewButtonError, JewErrorCooldown
+    if Money < MoneyLimit:
+        Money += (BaseMoneySpeed*MoneyLimit)/(FrameRate*4500)
+    else:
+        Money = MoneyLimit
     for i in range(len(Cooldown)):
         Cooldown[i] += 1
         if ButtonError[i] == True:
             ErrorCooldown[i] -= 1
             if ErrorCooldown[i] <= 0:
                 ButtonError[i] = False
+    if JewButtonError == True:
+        JewErrorCooldown -= 1
+        if JewErrorCooldown <= 0:
+            JewButtonError = False
     
 
     
@@ -134,8 +157,9 @@ while running:
     UnitOperations(UnitCount,UnitX,data,UnitType,UnitAnimation,FrameRate,EnemyCount,EnemyX)
     EnemyOperations(EnemyCount,EnemyX,data,EnemyType,EnemyAnimation,FrameRate,UnitCount,UnitX)
     Draw(screen,data,UnitX,UnitType,UnitAnimation,EnemyX,UnitY,EnemyY,EnemyType,UnitCount,EnemyCount)
-    DrawButtons(screen,UnitButton,UnitButtonSetup,ButtonError,Cooldown,data,FrameRate,AssignedButtonTypes)
+    DrawButtons(screen,UnitButton,UnitButtonSetup,ButtonError,Cooldown,data,FrameRate,AssignedButtonTypes,JewButtonError,JewButtonSetup)
     Cooldowns()
+    textplacement(screen,data,Money,MoneyLimit,JewButtonLevel)
     keys = pygame.key.get_pressed()
     pygame.display.flip()
     pygame.display.update()
