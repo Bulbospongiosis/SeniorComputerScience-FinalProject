@@ -34,7 +34,10 @@ UnitCount = 50
 UnitY = HEIGHT - 275
 UnitX = [0] * UnitCount
 UnitType = [0] * UnitCount
-UnitAnimation = [1] * UnitCount
+UnitAnimation = [0] * UnitCount
+UnitAtkAnimation = [0] * UnitCount
+UnitCooldown = [0] * UnitCount
+UnitHealth = [0] * UnitCount
 Cooldown = [999999999999999999] * 10
 AssignedButtonTypes = [1,1,1,1,1,1,1,0,0,0]
 ButtonError = [False] * 10
@@ -47,9 +50,13 @@ EnemyY = HEIGHT - 275
 EnemyX = [WIDTH] * EnemyCount
 EnemyType = [0] * EnemyCount
 EnemyAnimation = [1] * EnemyCount
+EnemyAtkAnimation = [0] * EnemyCount
+EnemyCooldown = [0] * EnemyCount
+EnemyHealth = [0] * EnemyCount
 
 
-EnemyX[0] = WIDTH - 1
+EnemyX[0] = WIDTH - 10
+EnemyHealth[0] = 100
 
 Money = 0
 BaseMoneySpeed = 170
@@ -99,11 +106,16 @@ def Button(position,numberclicked,unicode):
             Cooldown[i] = 0
             NextAvailableUnit = 0
             Money -= data["Units"][AssignedButtonTypes[i]]["UnitPrice"]
+            UnitHealth[NextAvailableUnit] = data["Units"][AssignedButtonTypes[i]]["UnitHealth"]
+            UnitCooldown[NextAvailableUnit] = 0
             while True:
                 if UnitX[NextAvailableUnit] == 0:
                     break
                 else:
-                    NextAvailableUnit += 1
+                    if NextAvailableUnit != UnitCount -1:
+                        NextAvailableUnit += 1
+                    else:
+                        break
         else:
             if (UnitButton[i].collidepoint(position) or (numberclicked and (unicode -1 == i or unicode + 9 == i))):
                 ButtonError[i] = True
@@ -140,7 +152,7 @@ def Cooldowns():
     
 
     
-            
+           
 
 running = True
 while running:
@@ -154,8 +166,8 @@ while running:
                 Button((-100,-100),True,int(event.unicode))
 
 
-    UnitOperations(UnitCount,UnitX,data,UnitType,UnitAnimation,FrameRate,EnemyCount,EnemyX)
-    EnemyOperations(EnemyCount,EnemyX,data,EnemyType,EnemyAnimation,FrameRate,UnitCount,UnitX)
+    UnitOperations(UnitCount,UnitX,data,UnitType,UnitAnimation,FrameRate,EnemyCount,EnemyX,UnitCooldown,UnitAtkAnimation,UnitHealth,EnemyHealth)
+    EnemyOperations(EnemyCount,EnemyX,data,EnemyType,EnemyAnimation,FrameRate,UnitCount,UnitX,UnitHealth,EnemyHealth,EnemyCooldown,EnemyAtkAnimation)
     Draw(screen,data,UnitX,UnitType,UnitAnimation,EnemyX,UnitY,EnemyY,EnemyType,UnitCount,EnemyCount)
     DrawButtons(screen,UnitButton,UnitButtonSetup,ButtonError,Cooldown,data,FrameRate,AssignedButtonTypes,JewButtonError,JewButtonSetup)
     Cooldowns()
