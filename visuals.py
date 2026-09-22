@@ -11,10 +11,11 @@ ORANGE = (255, 165, 0)
 
 WIDTH,HEIGHT = 1250,750
 
-def Draw(screen,data,UnitX,UnitType,UnitAnimation,EnemyX,UnitY,EnemyY,EnemyType,UnitCount,EnemyCount):
+def Draw(screen,data,UnitX,UnitType,UnitAnimation,EnemyX,UnitY,EnemyY,EnemyType,UnitCount,EnemyCount,DogHouse):
     screen.fill(WHITE)
-    #pygame.draw.rect(screen,BLACK,(0,0,100,100))
-    
+    pygame.draw.rect(screen,BLACK,(0,UnitY+25,WIDTH,500))
+    pygame.draw.rect(screen,WHITE,(935,600,175,90))
+    screen.blit(DogHouse, (1010,100))
     for i in range(UnitCount):
         if UnitX[i] > 0:
             

@@ -70,6 +70,8 @@ NextAvailableEnemy = 0
 
 
 #images
+DogHouse = pygame.transform.scale(pygame.image.load('__Pngs__/doghouse.png').convert_alpha(), (HEIGHT/1.5, HEIGHT/1.5))
+
 JewButtonSetup = pygame.transform.scale(pygame.image.load('__Pngs__/JewButton.png').convert_alpha(), (240, 240))
 JewButton = JewButtonSetup.get_rect(topleft=(900,500))
 UnitButtonSetup = [pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (150, 100)),
@@ -104,10 +106,11 @@ def Button(position,numberclicked,unicode):
             UnitX[NextAvailableUnit] = 1
             UnitType[NextAvailableUnit] = AssignedButtonTypes[i]
             Cooldown[i] = 0
-            NextAvailableUnit = 0
+            
             Money -= data["Units"][AssignedButtonTypes[i]]["UnitPrice"]
             UnitHealth[NextAvailableUnit] = data["Units"][AssignedButtonTypes[i]]["UnitHealth"]
             UnitCooldown[NextAvailableUnit] = 0
+            NextAvailableUnit += 1
             while True:
                 if UnitX[NextAvailableUnit] == 0:
                     break
@@ -168,7 +171,7 @@ while running:
 
     UnitOperations(UnitCount,UnitX,data,UnitType,UnitAnimation,FrameRate,EnemyCount,EnemyX,UnitCooldown,UnitAtkAnimation,UnitHealth,EnemyHealth)
     EnemyOperations(EnemyCount,EnemyX,data,EnemyType,EnemyAnimation,FrameRate,UnitCount,UnitX,UnitHealth,EnemyHealth,EnemyCooldown,EnemyAtkAnimation)
-    Draw(screen,data,UnitX,UnitType,UnitAnimation,EnemyX,UnitY,EnemyY,EnemyType,UnitCount,EnemyCount)
+    Draw(screen,data,UnitX,UnitType,UnitAnimation,EnemyX,UnitY,EnemyY,EnemyType,UnitCount,EnemyCount,DogHouse)
     DrawButtons(screen,UnitButton,UnitButtonSetup,ButtonError,Cooldown,data,FrameRate,AssignedButtonTypes,JewButtonError,JewButtonSetup)
     Cooldowns()
     textplacement(screen,data,Money,MoneyLimit,JewButtonLevel)

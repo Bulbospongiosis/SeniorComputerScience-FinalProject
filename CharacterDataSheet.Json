@@ -13,7 +13,8 @@
             "UnitCooldown":3,
             "UnitAtkCooldown":1,
             "UnitPrice":10,
-            "UnitDamage":10
+            "UnitDamage":10,
+            "UnitPause": "False"
            
 
         },
@@ -21,16 +22,17 @@
             "Name": "Base 2",
             "UnitHealth":100,
             "UnitWalkFrames":12,
-            "UnitAtkFrames":5,
-            "UnitSpeed":5,
-            "UnitRange":200,
+            "UnitAtkFrames":0,
+            "UnitSpeed":40,
+            "UnitRange":20,
             "UnitSize":20,
             "UnitBlindspot":0,
             "UnitPierce":0,
             "UnitCooldown":10,
-            "UnitAtkCooldown":1,
+            "UnitAtkCooldown":10,
             "UnitPrice":100,
-            "UnitDamage":10
+            "UnitDamage":100,
+            "UnitPause": "True"
            
 
         }
@@ -48,7 +50,8 @@
             "EnemyCooldown":3,
             "EnemyAtkCooldown":1,
             "EnemyPrice":10,
-            "EnemyDamage":10
+            "EnemyDamage":10,
+            "EnemyPause": "False"
         }
     ]
 }
