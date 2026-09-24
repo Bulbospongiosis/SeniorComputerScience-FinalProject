@@ -39,7 +39,7 @@ UnitAtkAnimation = [0] * UnitCount
 UnitCooldown = [0] * UnitCount
 UnitHealth = [0] * UnitCount
 Cooldown = [999999999999999999] * 10
-AssignedButtonTypes = [1,1,1,1,1,1,1,0,0,0]
+AssignedButtonTypes = [0,0,0,0,0,0,0,0,0,0]
 ButtonError = [False] * 10
 ErrorCooldown = [0] * 10
 JewButtonError = False
@@ -96,6 +96,24 @@ UnitButton = [UnitButtonSetup[AssignedButtonTypes[0]].get_rect(topleft=(100 + 25
               UnitButtonSetup[AssignedButtonTypes[9]].get_rect(topleft=(700 + 25, 600 + 25))
               ]
 
+JohnWalk = [pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (data["Units"][0]["UnitSize"], 2 * data["Units"][0]["UnitSize"])),
+            pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (data["Units"][0]["UnitSize"], 2 * data["Units"][0]["UnitSize"]))]
+JohnAtk = [pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (data["Units"][0]["UnitSize"], 2 * data["Units"][0]["UnitSize"])),
+           pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (data["Units"][0]["UnitSize"], 2 * data["Units"][0]["UnitSize"]))]
+
+WalkAnimations = [JohnWalk]
+AtkAnimations = [JohnAtk]
+
+
+
+
+DogTroopWalk = [pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (data["Enemy"][0]["EnemySize"], 2 * data["Enemy"][0]["EnemySize"])),
+            pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (data["Enemy"][0]["EnemySize"], 2 * data["Enemy"][0]["EnemySize"]))]
+DogTroopAtk = [pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (data["Enemy"][0]["EnemySize"], 2 * data["Enemy"][0]["EnemySize"])),
+           pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (data["Enemy"][0]["EnemySize"], 2 * data["Enemy"][0]["EnemySize"]))]
+
+EnemyWalkAnimations = [DogTroopWalk]
+EnemyAtkAnimations = [DogTroopAtk]
 
 
 
@@ -169,8 +187,8 @@ while running:
                 Button((-100,-100),True,int(event.unicode))
 
 
-    UnitOperations(UnitCount,UnitX,data,UnitType,UnitAnimation,FrameRate,EnemyCount,EnemyX,UnitCooldown,UnitAtkAnimation,UnitHealth,EnemyHealth)
-    EnemyOperations(EnemyCount,EnemyX,data,EnemyType,EnemyAnimation,FrameRate,UnitCount,UnitX,UnitHealth,EnemyHealth,EnemyCooldown,EnemyAtkAnimation)
+    UnitOperations(UnitCount,UnitX,data,UnitType,UnitAnimation,FrameRate,EnemyCount,EnemyX,UnitCooldown,UnitAtkAnimation,UnitHealth,EnemyHealth,WalkAnimations,AtkAnimations)
+    EnemyOperations(EnemyCount,EnemyX,data,EnemyType,EnemyAnimation,FrameRate,UnitCount,UnitX,UnitHealth,EnemyHealth,EnemyCooldown,EnemyAtkAnimation,EnemyWalkAnimations,EnemyAtkAnimations)
     Draw(screen,data,UnitX,UnitType,UnitAnimation,EnemyX,UnitY,EnemyY,EnemyType,UnitCount,EnemyCount,DogHouse)
     DrawButtons(screen,UnitButton,UnitButtonSetup,ButtonError,Cooldown,data,FrameRate,AssignedButtonTypes,JewButtonError,JewButtonSetup)
     Cooldowns()

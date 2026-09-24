@@ -2,7 +2,7 @@ import pygame
 
 WIDTH,HEIGHT = 1250,750
 
-def UnitOperations(UnitCount,UnitX,data,UnitType,UnitAnimation,FrameRate,EnemyCount,EnemyX,UnitCooldown,UnitAtkAnimation,UnitHealth,EnemyHealth):
+def UnitOperations(UnitCount,UnitX,data,UnitType,UnitAnimation,FrameRate,EnemyCount,EnemyX,UnitCooldown,UnitAtkAnimation,UnitHealth,EnemyHealth,WalkAnimations,AtkAnimations):
     
     for i in range(UnitCount):
         if UnitHealth[i] <= 0:
@@ -12,13 +12,13 @@ def UnitOperations(UnitCount,UnitX,data,UnitType,UnitAnimation,FrameRate,EnemyCo
                 
                 UnitX[i] += data["Units"][UnitType[i]]["UnitSpeed"]*24/FrameRate
                 UnitAtkAnimation[i] = 0
-                UnitAnimation[i] += 1 if UnitAnimation[i] < data["Units"][UnitType[i]]["UnitWalkFrames"]*FrameRate/12 else 1 - data["Units"][UnitType[i]]["UnitWalkFrames"]*FrameRate/12
+                UnitAnimation[i] += 1 if UnitAnimation[i] < len(WalkAnimations[UnitType[i]])*FrameRate/12 else -UnitAnimation[i]
                 if UnitCooldown[i] <= 0:
                     UnitCooldown[i] -= 1
             elif UnitX[i] > 0:
                 
                 if UnitCooldown[i] <= 0:
-                    if UnitAtkAnimation[i] >= data["Units"][UnitType[i]]["UnitAtkFrames"]*FrameRate/12:
+                    if UnitAtkAnimation[i] >= len(AtkAnimations[UnitType[i]])*FrameRate/12:
                         UnitCooldown[i] = data["Units"][UnitType[i]]["UnitAtkCooldown"]*FrameRate
                         UnitAtkAnimation[i] = 0
                         for j in range(EnemyCount):
@@ -31,7 +31,7 @@ def UnitOperations(UnitCount,UnitX,data,UnitType,UnitAnimation,FrameRate,EnemyCo
                     UnitCooldown[i] -= 1
                     UnitAtkAnimation[i] = 0
 
-def EnemyOperations(EnemyCount,EnemyX,data,EnemyType,EnemyAnimation,FrameRate,UnitCount,UnitX,UnitHealth,EnemyHealth,EnemyCooldown,EnemyAtkAnimation):   
+def EnemyOperations(EnemyCount,EnemyX,data,EnemyType,EnemyAnimation,FrameRate,UnitCount,UnitX,UnitHealth,EnemyHealth,EnemyCooldown,EnemyAtkAnimation,EnemyWalkAnimations,EnemyAtkAnimations):   
     
     for i in range(EnemyCount):
         if EnemyHealth[i] <= 0:
@@ -39,13 +39,13 @@ def EnemyOperations(EnemyCount,EnemyX,data,EnemyType,EnemyAnimation,FrameRate,Un
         if (EnemyCooldown[i] <= 0 and data["Enemy"][EnemyType[i]]["EnemyPause"] == "True") or data["Enemy"][EnemyType[i]]["EnemyPause"] == "False":
             if abs(EnemyX[i] - FrontmostUnit(UnitX,UnitCount)) > data["Enemy"][EnemyType[i]]["EnemyRange"] and EnemyX[i] < WIDTH:
                 EnemyX[i] -= data["Enemy"][EnemyType[i]]["EnemySpeed"]*24/FrameRate
-                EnemyAnimation[i] += 1 if EnemyAnimation[i] < data["Enemy"][EnemyType[i]]["EnemyWalkFrames"]*FrameRate/12 else 1 - data["Enemy"][EnemyType[i]]["EnemyWalkFrames"]*FrameRate/12
+                EnemyAnimation[i] += 1 if EnemyAnimation[i] < len(EnemyWalkAnimations[EnemyType[i]])*FrameRate/12 else -EnemyAnimation[i]
                 if EnemyCooldown[i] <= 0:
                     EnemyCooldown[i] -= 1
             elif EnemyX[i] < WIDTH:
                         
                 if EnemyCooldown[i] <= 0:
-                    if EnemyAtkAnimation[i] >= data["Enemy"][EnemyType[i]]["EnemyAtkFrames"]*FrameRate/12:
+                    if EnemyAtkAnimation[i] >= len(EnemyAtkAnimations[EnemyType[i]])*FrameRate/12:
                         EnemyCooldown[i] = data["Enemy"][EnemyType[i]]["EnemyAtkCooldown"]*FrameRate
                         EnemyAtkAnimation[i] = 0
                         for j in range(UnitCount):
@@ -59,7 +59,7 @@ def EnemyOperations(EnemyCount,EnemyX,data,EnemyType,EnemyAnimation,FrameRate,Un
                     EnemyAtkAnimation[i] = 0
 
 
-                    
+
 def FrontmostUnit(UnitX,UnitCount):
     FrontmostX = UnitX[0]
     for i in range(UnitCount):
