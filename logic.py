@@ -18,7 +18,7 @@ def UnitOperations(UnitCount,UnitX,data,UnitType,UnitAnimation,FrameRate,EnemyCo
             elif UnitX[i] > 0:
                 
                 if UnitCooldown[i] <= 0:
-                    if UnitAtkAnimation[i] >= len(AtkAnimations[UnitType[i]])*FrameRate/12:
+                    if UnitAtkAnimation[i] >= (len(AtkAnimations[UnitType[i]])-1)*FrameRate/12:
                         UnitCooldown[i] = data["Units"][UnitType[i]]["UnitAtkCooldown"]*FrameRate
                         UnitAtkAnimation[i] = 0
                         for j in range(EnemyCount):
@@ -45,7 +45,7 @@ def EnemyOperations(EnemyCount,EnemyX,data,EnemyType,EnemyAnimation,FrameRate,Un
             elif EnemyX[i] < WIDTH:
                         
                 if EnemyCooldown[i] <= 0:
-                    if EnemyAtkAnimation[i] >= len(EnemyAtkAnimations[EnemyType[i]])*FrameRate/12:
+                    if EnemyAtkAnimation[i] >= (len(EnemyAtkAnimations[EnemyType[i]])-1)*FrameRate/12:
                         EnemyCooldown[i] = data["Enemy"][EnemyType[i]]["EnemyAtkCooldown"]*FrameRate
                         EnemyAtkAnimation[i] = 0
                         for j in range(UnitCount):

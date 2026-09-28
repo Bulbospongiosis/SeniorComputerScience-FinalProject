@@ -98,8 +98,7 @@ UnitButton = [UnitButtonSetup[AssignedButtonTypes[0]].get_rect(topleft=(100 + 25
 
 JohnWalk = [pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (data["Units"][0]["UnitSize"], 2 * data["Units"][0]["UnitSize"])),
             pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (data["Units"][0]["UnitSize"], 2 * data["Units"][0]["UnitSize"]))]
-JohnAtk = [pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (data["Units"][0]["UnitSize"], 2 * data["Units"][0]["UnitSize"])),
-           pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (data["Units"][0]["UnitSize"], 2 * data["Units"][0]["UnitSize"]))]
+JohnAtk = [pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (data["Units"][0]["UnitSize"], 2 * data["Units"][0]["UnitSize"]))]
 
 WalkAnimations = [JohnWalk]
 AtkAnimations = [JohnAtk]
