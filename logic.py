@@ -18,12 +18,21 @@ def UnitOperations(UnitCount,UnitX,data,UnitType,UnitAnimation,FrameRate,EnemyCo
             elif UnitX[i] > 0:
                 
                 if UnitCooldown[i] <= 0:
-                    if UnitAtkAnimation[i] >= (len(AtkAnimations[UnitType[i]])-1)*FrameRate/12:
+                    if UnitAtkAnimation[i] >= len(AtkAnimations[UnitType[i]])*FrameRate/12:
                         UnitCooldown[i] = data["Units"][UnitType[i]]["UnitAtkCooldown"]*FrameRate
                         UnitAtkAnimation[i] = 0
-                        for j in range(EnemyCount):
-                            if EnemyX[j] <= UnitX[i] + data["Units"][UnitType[i]]["UnitRange"] + data["Units"][UnitType[i]]["UnitPierce"] and EnemyX[j] >= UnitX[i] + data["Units"][UnitType[i]]["UnitBlindspot"]:
-                                EnemyHealth[j] -= data["Units"][UnitType[i]]["UnitDamage"]
+
+                        if data["Units"][UnitType[i]]["UnitAttackType"] == "Area":
+                            for j in range(EnemyCount):
+                                if EnemyX[j] <= UnitX[i] + data["Units"][UnitType[i]]["UnitRange"] + data["Units"][UnitType[i]]["UnitPierce"] and EnemyX[j] >= UnitX[i] + data["Units"][UnitType[i]]["UnitBlindspot"]:
+                                    EnemyHealth[j] -= data["Units"][UnitType[i]]["UnitDamage"]
+
+                        elif data["Units"][UnitType[i]]["UnitAttackType"] == "Single":
+                            for j in range(EnemyCount):
+                                if EnemyX[j] <= UnitX[i] + data["Units"][UnitType[i]]["UnitRange"] + data["Units"][UnitType[i]]["UnitPierce"] and EnemyX[j] >= UnitX[i] + data["Units"][UnitType[i]]["UnitBlindspot"]:
+                                    if EnemyX[j] == FrontmostEnemy(EnemyX,EnemyCount):
+                                        EnemyHealth[j] -= data["Units"][UnitType[i]]["UnitDamage"]
+                                        break
                                 
                     else:
                         UnitAtkAnimation[i] += 1
@@ -45,15 +54,21 @@ def EnemyOperations(EnemyCount,EnemyX,data,EnemyType,EnemyAnimation,FrameRate,Un
             elif EnemyX[i] < WIDTH:
                         
                 if EnemyCooldown[i] <= 0:
-                    if EnemyAtkAnimation[i] >= (len(EnemyAtkAnimations[EnemyType[i]])-1)*FrameRate/12:
-                        EnemyCooldown[i] = data["Enemy"][EnemyType[i]]["EnemyAtkCooldown"]*FrameRate
-                        EnemyAtkAnimation[i] = 0
-                        for j in range(UnitCount):
-                            if UnitX[j] >= EnemyX[i] - data["Enemy"][EnemyType[i]]["EnemyRange"] - data["Enemy"][EnemyType[i]]["EnemyPierce"] and UnitX[j] <= EnemyX[i] - data["Enemy"][EnemyType[i]]["EnemyBlindspot"]:
-                                UnitHealth[j] -= data["Enemy"][EnemyType[i]]["EnemyDamage"]
-                                
-                    else:
-                        EnemyAtkAnimation[i] += 1
+                        if EnemyAtkAnimation[i] >= len(EnemyAtkAnimations[EnemyType[i]])*FrameRate/12:
+                            EnemyCooldown[i] = data["Enemy"][EnemyType[i]]["EnemyAtkCooldown"]*FrameRate
+                            EnemyAtkAnimation[i] = 0
+                            if data["Enemy"][EnemyType[i]]["EnemyAttackType"] == "Area":
+                                for j in range(UnitCount):
+                                    if UnitX[j] >= EnemyX[i] - data["Enemy"][EnemyType[i]]["EnemyRange"] - data["Enemy"][EnemyType[i]]["EnemyPierce"] and UnitX[j] <= EnemyX[i] - data["Enemy"][EnemyType[i]]["EnemyBlindspot"]:
+                                        UnitHealth[j] -= data["Enemy"][EnemyType[i]]["EnemyDamage"]
+                            elif data["Enemy"][EnemyType[i]]["EnemyAttackType"] == "Single":
+                                for j in range(UnitCount):
+                                    if UnitX[j] >= EnemyX[i] - data["Enemy"][EnemyType[i]]["EnemyRange"] - data["Enemy"][EnemyType[i]]["EnemyPierce"] and UnitX[j] <= EnemyX[i] - data["Enemy"][EnemyType[i]]["EnemyBlindspot"]:
+                                        if UnitX[j] == FrontmostUnit(UnitX, UnitCount):
+                                            UnitHealth[j] -= data["Enemy"][EnemyType[i]]["EnemyDamage"]
+                                            break
+                        else:
+                            EnemyAtkAnimation[i] += 1
                 else:
                     EnemyCooldown[i] -= 1
                     EnemyAtkAnimation[i] = 0

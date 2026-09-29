@@ -14,7 +14,8 @@
             "UnitAtkCooldown":10,
             "UnitPrice":100,
             "UnitDamage":100,
-            "UnitPause": "True"
+            "UnitPause": "True",
+            "UnitAttackType": "Single"
            
 
         }
@@ -33,7 +34,8 @@
             "EnemyAtkCooldown":1,
             "EnemyPrice":10,
             "EnemyDamage":10,
-            "EnemyPause": "False"
+            "EnemyPause": "False",
+            "EnemyAttackType": "Area"
         }
     ]
 }
