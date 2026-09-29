@@ -31,6 +31,7 @@ ORANGE = (255, 165, 0)
 FrameRate = 60
 
 UnitCount = 50
+UnitBaseHealth = 5000
 UnitY = HEIGHT - 275
 UnitX = [0] * UnitCount
 UnitType = [0] * UnitCount
@@ -46,6 +47,7 @@ JewButtonError = False
 JewErrorCooldown = 0
 
 EnemyCount = 50
+EnemyBaseHealth = 5000
 EnemyY = HEIGHT - 275
 EnemyX = [WIDTH] * EnemyCount
 EnemyType = [0] * EnemyCount
@@ -57,6 +59,7 @@ EnemyHealth = [0] * EnemyCount
 
 EnemyX[0] = WIDTH - 10
 EnemyHealth[0] = 100
+
 
 Money = 0
 BaseMoneySpeed = 170
@@ -186,8 +189,8 @@ while running:
                 Button((-100,-100),True,int(event.unicode))
 
 
-    UnitOperations(UnitCount,UnitX,data,UnitType,UnitAnimation,FrameRate,EnemyCount,EnemyX,UnitCooldown,UnitAtkAnimation,UnitHealth,EnemyHealth,WalkAnimations,AtkAnimations)
-    EnemyOperations(EnemyCount,EnemyX,data,EnemyType,EnemyAnimation,FrameRate,UnitCount,UnitX,UnitHealth,EnemyHealth,EnemyCooldown,EnemyAtkAnimation,EnemyWalkAnimations,EnemyAtkAnimations)
+    UnitOperations(UnitCount,UnitX,data,UnitType,UnitAnimation,FrameRate,EnemyCount,EnemyX,UnitCooldown,UnitAtkAnimation,UnitHealth,EnemyHealth,WalkAnimations,AtkAnimations,EnemyBaseHealth)
+    EnemyOperations(EnemyCount,EnemyX,data,EnemyType,EnemyAnimation,FrameRate,UnitCount,UnitX,UnitHealth,EnemyHealth,EnemyCooldown,EnemyAtkAnimation,EnemyWalkAnimations,EnemyAtkAnimations,UnitBaseHealth)
     Draw(screen,data,UnitX,UnitType,UnitAnimation,EnemyX,UnitY,EnemyY,EnemyType,UnitCount,EnemyCount,DogHouse)
     DrawButtons(screen,UnitButton,UnitButtonSetup,ButtonError,Cooldown,data,FrameRate,AssignedButtonTypes,JewButtonError,JewButtonSetup)
     Cooldowns()
