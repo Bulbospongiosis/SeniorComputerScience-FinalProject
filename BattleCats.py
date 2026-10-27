@@ -59,10 +59,6 @@ EnemyCooldown = [0] * EnemyCount
 EnemyHealth = [0] * EnemyCount
 
 
-EnemyX[0] = WIDTH - 10
-EnemyHealth[0] = 100
-
-
 Money = 0
 BaseMoneySpeed = 170
 MoneyLimit = 4500
@@ -207,6 +203,9 @@ def StatReset():
 
     NextAvailableUnit = 0
     NextAvailableEnemy = 0
+
+    EnemyX[0] = WIDTH - 10
+    EnemyHealth[0] = 100
 
     
 PlayMusic()
