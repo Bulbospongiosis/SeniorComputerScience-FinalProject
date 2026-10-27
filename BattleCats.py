@@ -5,12 +5,14 @@ import math
 import json
 from logic import UnitOperations, EnemyOperations
 from visuals import Draw, DrawButtons, textplacement
+from menu import menuappear
 
 
 with open("CharacterDataSheet.json", "r") as file:
     data = json.load(file)
 
 pygame.init()
+pygame.mixer.init()
 
 WIDTH,HEIGHT = 1250,750
 
@@ -70,9 +72,16 @@ NextAvailableUnit = 0
 NextAvailableEnemy = 0
 
 
+menu = True
+
+Level = "Hell"
+
+
+#sounds
 
 
 #images
+background = pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (WIDTH,HEIGHT))
 DogHouse = pygame.transform.scale(pygame.image.load('__Pngs__/doghouse.png').convert_alpha(), (HEIGHT/1.5, HEIGHT/1.5))
 
 JewButtonSetup = pygame.transform.scale(pygame.image.load('__Pngs__/JewButton.png').convert_alpha(), (240, 240))
@@ -173,10 +182,36 @@ def Cooldowns():
         if JewErrorCooldown <= 0:
             JewButtonError = False
     
+def PlayMusic():
+    if Level == "Hell":
+        pygame.mixer.music.load('__SFX__/theme.mp3')
+    
+    pygame.mixer.music.play(-1)
+
+def StatReset():
+    global UnitX, UnitHealth, Cooldown, ButtonError, ErrorCooldown, EnemyX, EnemyCooldown, EnemyHealth, Money, BaseMoneySpeed, MoneyLimit, JewButtonLevel, NextAvailableUnit, NextAvailableEnemy
+    UnitX = [0] * UnitCount
+    UnitHealth = [0] * UnitCount
+    Cooldown = [999999999999999999] * 10
+    ButtonError = [False] * 10
+    ErrorCooldown = [0] * 10
+
+    EnemyX = [WIDTH] * EnemyCount
+    EnemyCooldown = [0] * EnemyCount
+    EnemyHealth = [0] * EnemyCount
+
+    Money = 0
+    BaseMoneySpeed = 170
+    MoneyLimit = 4500
+    JewButtonLevel = 1
+
+    NextAvailableUnit = 0
+    NextAvailableEnemy = 0
 
     
-           
-
+PlayMusic()
+StatReset()       
+menu = False
 running = True
 while running:
     for event in pygame.event.get():
@@ -189,15 +224,23 @@ while running:
                 Button((-100,-100),True,int(event.unicode))
 
 
-    UnitOperations(UnitCount,UnitX,data,UnitType,UnitAnimation,FrameRate,EnemyCount,EnemyX,UnitCooldown,UnitAtkAnimation,UnitHealth,EnemyHealth,WalkAnimations,AtkAnimations,EnemyBaseHealth)
-    EnemyOperations(EnemyCount,EnemyX,data,EnemyType,EnemyAnimation,FrameRate,UnitCount,UnitX,UnitHealth,EnemyHealth,EnemyCooldown,EnemyAtkAnimation,EnemyWalkAnimations,EnemyAtkAnimations,UnitBaseHealth)
-    Draw(screen,data,UnitX,UnitType,UnitAnimation,EnemyX,UnitY,EnemyY,EnemyType,UnitCount,EnemyCount,DogHouse)
-    DrawButtons(screen,UnitButton,UnitButtonSetup,ButtonError,Cooldown,data,FrameRate,AssignedButtonTypes,JewButtonError,JewButtonSetup)
-    Cooldowns()
-    textplacement(screen,data,Money,MoneyLimit,JewButtonLevel)
+    if not menu:
+        pygame.mixer.music.unpause()
+        UnitOperations(UnitCount,UnitX,data,UnitType,UnitAnimation,FrameRate,EnemyCount,EnemyX,UnitCooldown,UnitAtkAnimation,UnitHealth,EnemyHealth,WalkAnimations,AtkAnimations,EnemyBaseHealth)
+        EnemyOperations(EnemyCount,EnemyX,data,EnemyType,EnemyAnimation,FrameRate,UnitCount,UnitX,UnitHealth,EnemyHealth,EnemyCooldown,EnemyAtkAnimation,EnemyWalkAnimations,EnemyAtkAnimations,UnitBaseHealth)
+        Draw(screen,data,UnitX,UnitType,UnitAnimation,EnemyX,UnitY,EnemyY,EnemyType,UnitCount,EnemyCount,DogHouse)
+        DrawButtons(screen,UnitButton,UnitButtonSetup,ButtonError,Cooldown,data,FrameRate,AssignedButtonTypes,JewButtonError,JewButtonSetup)
+        Cooldowns()
+        textplacement(screen,data,Money,MoneyLimit,JewButtonLevel)
+        
+    else:
+        pygame.mixer.music.pause()
+        StatReset()
+        menuappear(AssignedButtonTypes,data,screen,background)
     keys = pygame.key.get_pressed()
     pygame.display.flip()
     pygame.display.update()
     clock.tick(FrameRate)
 pygame.quit()
+pygame.mixer.quit()
 sys.exit()
