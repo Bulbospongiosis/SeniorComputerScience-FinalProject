@@ -29,3 +29,10 @@ class Enemy:
         self.EnemyAtkAnimation = 0
         self.EnemyCooldown = 0
         self.EnemyHealth = 0
+
+    def drawWalk(self):
+        return self.EnemyWalkAnimation[self.EnemyType][self.EnemyAnimation]
+    def drawAtk(self):
+        return self.EnemyAtkAnimation[self.EnemyType][self.EnemyAnimation]
+    def drawStand(self):
+        return self.EnemyAtkAnimation[self.EnemyType][0]

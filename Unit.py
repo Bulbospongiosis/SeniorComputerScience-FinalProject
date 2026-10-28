@@ -26,3 +26,10 @@ class Unit:
         self.UnitAtkAnimation = 0
         self.UnitCooldown = 0
         self.UnitHealth = 0
+
+    def drawWalk(self):
+        return self.WalkAnimation[self.UnitType][self.UnitAnimation]
+    def drawAtk(self):
+            return self.AtkAnimation[self.UnitType][self.UnitAnimation]
+    def drawStand(self):
+            return self.AtkAnimation[self.UnitType][0]

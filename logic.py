@@ -15,6 +15,7 @@ def UnitOperations(UnitCount,Units,data,FrameRate,EnemyCount,Enemies,EnemyBaseHe
                 Units[i].UnitX += data["Units"][Units[i].UnitType]["UnitSpeed"]*24/FrameRate
                 Units[i].UnitAtkAnimation = 0
                 Units[i].UnitAnimation += 1 if Units[i].UnitAnimation < len(Units[i].WalkAnimations[Units[i].UnitType])*FrameRate/12 else -Units[i].UnitAnimation
+                
 
             elif Units[i].UnitX > 0:
 
@@ -45,10 +46,12 @@ def UnitOperations(UnitCount,Units,data,FrameRate,EnemyCount,Enemies,EnemyBaseHe
                     Units[i].UnitCooldown -= 1
                     Units[i].UnitAtkAnimation = 0
 
-def EnemyOperations(EnemyCount,Enemies,data,FrameRate,UnitCount,Units,UnitBaseHealth):   
+def EnemyOperations(EnemyCount,Enemies,data,FrameRate,UnitCount,Units,UnitBaseHealth,Money):   
 
     for i in range(EnemyCount):
         if Enemies[i].EnemyHealth <= 0:
+            if Enemies[i].EnemyX < WIDTH:
+                Money += data["Enemy"][Enemies[i].EnemyType]["EnemyHealth"]
             Enemies[i].EnemyX = WIDTH
         if Enemies[i].EnemyCooldown >= 0:
             Enemies[i].EnemyCooldown -= 1
@@ -83,6 +86,7 @@ def EnemyOperations(EnemyCount,Enemies,data,FrameRate,UnitCount,Units,UnitBaseHe
                 else:
                     Enemies[i].EnemyCooldown -= 1
                     Enemies[i].EnemyAtkAnimation = 0
+    return Money
 
 
 

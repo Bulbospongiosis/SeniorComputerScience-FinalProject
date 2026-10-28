@@ -200,7 +200,8 @@ def StatReset():
     NextAvailableEnemy = 0
 
     Enemies[0].EnemyX = WIDTH - 10
-    Enemies[0].EnemyHealth = 100
+    Enemies[0].EnemyHealth = data["Enemy"][Enemies[i].EnemyType]["EnemyHealth"]
+    Enemies[0].EnemyType = 0
 
 
 PlayMusic()
@@ -221,7 +222,7 @@ while running:
     if not menu:
         pygame.mixer.music.unpause()
         UnitOperations(UnitCount,Units,data,FrameRate,EnemyCount,Enemies,EnemyBaseHealth)
-        EnemyOperations(EnemyCount,Enemies,data,FrameRate,UnitCount,Units,UnitBaseHealth)
+        Money = EnemyOperations(EnemyCount,Enemies,data,FrameRate,UnitCount,Units,UnitBaseHealth,Money)
         Draw(screen,data,Units,Enemies,UnitY,EnemyY,UnitCount,EnemyCount,DogHouse)
         DrawButtons(screen,UnitButton,UnitButtonSetup,ButtonError,Cooldown,data,FrameRate,AssignedButtonTypes,JewButtonError,JewButtonSetup)
         Cooldowns()
