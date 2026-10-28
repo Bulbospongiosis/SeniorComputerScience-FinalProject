@@ -6,6 +6,8 @@ import json
 from logic import UnitOperations, EnemyOperations
 from visuals import Draw, DrawButtons, textplacement
 from menu import menuappear
+from Unit import Unit
+from Enemy import Enemy
 
 
 with open("CharacterDataSheet.json", "r") as file:
@@ -35,12 +37,10 @@ FrameRate = 60
 UnitCount = 50
 UnitBaseHealth = 5000
 UnitY = HEIGHT - 275
-UnitX = [0] * UnitCount
-UnitType = [0] * UnitCount
-UnitAnimation = [0] * UnitCount
-UnitAtkAnimation = [0] * UnitCount
-UnitCooldown = [0] * UnitCount
-UnitHealth = [0] * UnitCount
+Units = []
+for i in range(UnitCount):
+    Units.append(Unit())
+
 Cooldown = [999999999999999999] * 10
 AssignedButtonTypes = [0,0,0,0,0,0,0,0,0,0]
 ButtonError = [False] * 10
@@ -51,12 +51,10 @@ JewErrorCooldown = 0
 EnemyCount = 50
 EnemyBaseHealth = 5000
 EnemyY = HEIGHT - 275
-EnemyX = [WIDTH] * EnemyCount
-EnemyType = [0] * EnemyCount
-EnemyAnimation = [1] * EnemyCount
-EnemyAtkAnimation = [0] * EnemyCount
-EnemyCooldown = [0] * EnemyCount
-EnemyHealth = [0] * EnemyCount
+Enemies = []
+for i in range(EnemyCount):
+    Enemies.append(Enemy())
+
 
 
 Money = 0
@@ -125,19 +123,19 @@ EnemyAtkAnimations = [DogTroopAtk]
 
 
 def Button(position,numberclicked,unicode):
-    global JewButtonError, JewButtonLevel, JewButton, JewErrorCooldown, UnitX, NextAvailableUnit, UnitButton, Cooldown, data, AssignedButtonTypes, FrameRate, Money, ButtonError, ErrorCooldown, MoneyLimit
+    global JewButtonError, JewButtonLevel, JewButton, JewErrorCooldown, NextAvailableUnit, UnitButton, Cooldown, data, AssignedButtonTypes, FrameRate, Money, ButtonError, ErrorCooldown, MoneyLimit
     for i in range(len(UnitButton)):
-        if ErrorCooldown[i] <= 0 and (UnitButton[i].collidepoint(position) or (numberclicked and (unicode -1 == i or unicode + 9 == i))) and Cooldown[i] >= data["Units"][AssignedButtonTypes[i]]["UnitCooldown"] * FrameRate and UnitX[NextAvailableUnit] == 0 and Money >= data["Units"][AssignedButtonTypes[i]]["UnitPrice"]:
-            UnitX[NextAvailableUnit] = 1
-            UnitType[NextAvailableUnit] = AssignedButtonTypes[i]
+        if ErrorCooldown[i] <= 0 and (UnitButton[i].collidepoint(position) or (numberclicked and (unicode -1 == i or unicode + 9 == i))) and Cooldown[i] >= data["Units"][AssignedButtonTypes[i]]["UnitCooldown"] * FrameRate and Units[NextAvailableUnit].UnitX == 0 and Money >= data["Units"][AssignedButtonTypes[i]]["UnitPrice"]:
+            Units[NextAvailableUnit].UnitX = 1
+            Units[NextAvailableUnit].UnitType = AssignedButtonTypes[i]
             Cooldown[i] = 0
-            
+
             Money -= data["Units"][AssignedButtonTypes[i]]["UnitPrice"]
-            UnitHealth[NextAvailableUnit] = data["Units"][AssignedButtonTypes[i]]["UnitHealth"]
-            UnitCooldown[NextAvailableUnit] = 0
+            Units[NextAvailableUnit].UnitHealth = data["Units"][AssignedButtonTypes[i]]["UnitHealth"]
+            Units[NextAvailableUnit].UnitCooldown = 0
             NextAvailableUnit += 1
             while True:
-                if UnitX[NextAvailableUnit] == 0:
+                if Units[NextAvailableUnit].UnitX == 0:
                     break
                 else:
                     if NextAvailableUnit != UnitCount -1:
@@ -158,7 +156,7 @@ def Button(position,numberclicked,unicode):
             JewErrorCooldown = 0.15 * FrameRate
 
 
-                
+
 
 
 def Cooldowns():
@@ -177,24 +175,33 @@ def Cooldowns():
         JewErrorCooldown -= 1
         if JewErrorCooldown <= 0:
             JewButtonError = False
-    
+
 def PlayMusic():
     if Level == "Hell":
         pygame.mixer.music.load('__SFX__/theme.mp3')
-    
+
     pygame.mixer.music.play(-1)
 
 def StatReset():
-    global UnitX, UnitHealth, Cooldown, ButtonError, ErrorCooldown, EnemyX, EnemyCooldown, EnemyHealth, Money, BaseMoneySpeed, MoneyLimit, JewButtonLevel, NextAvailableUnit, NextAvailableEnemy
-    UnitX = [0] * UnitCount
-    UnitHealth = [0] * UnitCount
+    global Cooldown, ButtonError, ErrorCooldown, Money, BaseMoneySpeed, MoneyLimit, JewButtonLevel, NextAvailableUnit, NextAvailableEnemy
+    for i in range(UnitCount):
+        Units[i].UnitX = 0
+        Units[i].UnitHealth = 0
+        Units[i].UnitType = 0
+        Units[i].UnitAnimation = 0
+        Units[i].UnitAtkAnimation = 0
+        Units[i].UnitCooldown = 0
     Cooldown = [999999999999999999] * 10
     ButtonError = [False] * 10
     ErrorCooldown = [0] * 10
 
-    EnemyX = [WIDTH] * EnemyCount
-    EnemyCooldown = [0] * EnemyCount
-    EnemyHealth = [0] * EnemyCount
+    for i in range(EnemyCount):
+        Enemies[i].EnemyX = WIDTH
+        Enemies[i].EnemyCooldown = 0
+        Enemies[i].EnemyHealth = 0
+        Enemies[i].EnemyType = 0
+        Enemies[i].EnemyAnimation = 0
+        Enemies[i].EnemyAtkAnimation = 0
 
     Money = 0
     BaseMoneySpeed = 170
@@ -204,10 +211,10 @@ def StatReset():
     NextAvailableUnit = 0
     NextAvailableEnemy = 0
 
-    EnemyX[0] = WIDTH - 10
-    EnemyHealth[0] = 100
+    Enemies[0].EnemyX = WIDTH - 10
+    Enemies[0].EnemyHealth = 100
 
-    
+
 PlayMusic()
 StatReset()       
 menu = False
@@ -225,13 +232,13 @@ while running:
 
     if not menu:
         pygame.mixer.music.unpause()
-        UnitOperations(UnitCount,UnitX,data,UnitType,UnitAnimation,FrameRate,EnemyCount,EnemyX,UnitCooldown,UnitAtkAnimation,UnitHealth,EnemyHealth,WalkAnimations,AtkAnimations,EnemyBaseHealth)
-        EnemyOperations(EnemyCount,EnemyX,data,EnemyType,EnemyAnimation,FrameRate,UnitCount,UnitX,UnitHealth,EnemyHealth,EnemyCooldown,EnemyAtkAnimation,EnemyWalkAnimations,EnemyAtkAnimations,UnitBaseHealth)
-        Draw(screen,data,UnitX,UnitType,UnitAnimation,EnemyX,UnitY,EnemyY,EnemyType,UnitCount,EnemyCount,DogHouse)
+        UnitOperations(UnitCount,Units,data,FrameRate,EnemyCount,Enemies,WalkAnimations,AtkAnimations,EnemyBaseHealth)
+        EnemyOperations(EnemyCount,Enemies,data,FrameRate,UnitCount,Units,EnemyWalkAnimations,EnemyAtkAnimations,UnitBaseHealth)
+        Draw(screen,data,Units,Enemies,UnitY,EnemyY,UnitCount,EnemyCount,DogHouse)
         DrawButtons(screen,UnitButton,UnitButtonSetup,ButtonError,Cooldown,data,FrameRate,AssignedButtonTypes,JewButtonError,JewButtonSetup)
         Cooldowns()
         textplacement(screen,data,Money,MoneyLimit,JewButtonLevel)
-        
+
     else:
         pygame.mixer.music.pause()
         StatReset()
