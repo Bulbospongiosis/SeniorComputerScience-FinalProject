@@ -83,7 +83,12 @@ def textplacement(screen,data,Money,MoneyLimit,JewButtonLevel):
 
     screen.blit(TextSurf,TextRect)
 
-    screen.blit(render_thick_outlined_text((str(int(MoneyLimit - 1500)) + "¢" ), MidText, BLACK,WHITE,2),(976,685))
+    if JewButtonLevel < 6:
+        screen.blit(render_thick_outlined_text((str(int(MoneyLimit - 1500)) + "¢" ), MidText, BLACK,WHITE,2),(976,685))
+    elif JewButtonLevel < 8:
+        screen.blit(render_thick_outlined_text((str(int(MoneyLimit - 1500)) + "¢" ), MidText, BLACK,WHITE,2),(966,685))
+    else:
+        screen.blit(render_thick_outlined_text("Max ¢" , MidText, BLACK,WHITE,2),(976,685))
     screen.blit(render_thick_outlined_text("LeveL " + str(int(JewButtonLevel)), MidText2, BLACK,WHITE,3),(955,510))
 
 
