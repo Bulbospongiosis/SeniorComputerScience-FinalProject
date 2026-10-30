@@ -12,4 +12,4 @@ ORANGE = (255, 165, 0)
 WIDTH,HEIGHT = 1250,750
 
 def menuappear(AssignedButtonTypes,data,screen,background):
-    screen.fill(BLACK)
+    screen.fill(PURPLE)

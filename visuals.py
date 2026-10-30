@@ -26,7 +26,7 @@ def Draw(screen,data,Units,Enemies,UnitY,EnemyY,UnitCount,EnemyCount,DogHouse):
             pygame.draw.rect(screen,BLACK,(Enemies[i].EnemyX,EnemyY - data["Enemy"][Enemies[i].EnemyType]["EnemySize"],data["Enemy"][Enemies[i].EnemyType]["EnemySize"],data["Enemy"][Enemies[i].EnemyType]["EnemySize"]))
 
 
-def DrawButtons(screen,UnitButton,UnitButtonSetup,ButtonError,Cooldown,data,FrameRate,AssignedButtonTypes,JewButtonError,JewButtonSetup):
+def DrawButtons(screen,UnitButton,UnitButtonSetup,ButtonError,Cooldown,data,FrameRate,AssignedButtonTypes,JewButtonError,JewButtonSetup,Playing,StartButtonSetup):
     pygame.draw.rect(screen,BLACK,(90,515,770,220))
     for i in range(5):
         if ButtonError[i] == False:
@@ -58,10 +58,16 @@ def DrawButtons(screen,UnitButton,UnitButtonSetup,ButtonError,Cooldown,data,Fram
             cooldown_surface = pygame.Surface((width, 100), pygame.SRCALPHA)
             cooldown_surface.fill((0, 0, 0, 128))  # Semi-transparent black
             screen.blit(cooldown_surface, (100 + (150 * i), 600 + 25))
-    if JewButtonError == False:
-        screen.blit(JewButtonSetup, (900,500))
+    if Playing:
+        if JewButtonError == False:
+            screen.blit(JewButtonSetup, (900,500))
+        else:
+            screen.blit(tint_image_red(JewButtonSetup,0.6), (900,500))
     else:
-        screen.blit(tint_image_red(JewButtonSetup,0.6), (900,500))
+        pygame.draw.rect(screen,BLACK,(935+25,600,175,90))
+        screen.blit(StartButtonSetup, (900+25,500))
+    
+
 def tint_image_red(image_surface, tint_intensity):
 
     tinted = image_surface.copy()
@@ -73,7 +79,13 @@ def tint_image_red(image_surface, tint_intensity):
     tinted.fill((r, g, b, 255), special_flags=pygame.BLEND_RGBA_MULT)
 
     return tinted
+def tint_image_black(image_surface):
 
+    tinted = image_surface.copy()
+
+    tinted.fill((0, 0, 0, 255), special_flags=pygame.BLEND_RGBA_MULT)
+
+    return tinted
 def textplacement(screen,data,Money,MoneyLimit,JewButtonLevel):
     largeText = pygame.font.Font('freesansbold.ttf',60)
     MidText = pygame.font.Font('freesansbold.ttf',30)

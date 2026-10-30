@@ -66,8 +66,6 @@ NextAvailableUnit = 0
 NextAvailableEnemy = 0
 
 
-menu = True
-
 Level = "Hell"
 
 
@@ -79,7 +77,9 @@ background = pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').conver
 DogHouse = pygame.transform.scale(pygame.image.load('__Pngs__/doghouse.png').convert_alpha(), (HEIGHT/1.5, HEIGHT/1.5))
 
 JewButtonSetup = pygame.transform.scale(pygame.image.load('__Pngs__/JewButton.png').convert_alpha(), (240, 240))
-JewButton = JewButtonSetup.get_rect(topleft=(900,500))
+JewButton = JewButtonSetup.get_rect(topleft=(900+25,500+25))
+StartButtonSetup = pygame.transform.scale(pygame.image.load('__Pngs__/Startbutton.png').convert_alpha(), (240, 240))
+StartButton = JewButtonSetup.get_rect(topleft=(900+25,500+25))
 UnitButtonSetup = [pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (150, 100)),
                    pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (150, 100)),
                    pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (150, 100)),
@@ -89,7 +89,11 @@ UnitButtonSetup = [pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').
                    pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (150, 100)),
                    pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (150, 100)),
                    pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (150, 100)),
-                   pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (150, 100)),]
+                   pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (150, 100)),
+
+
+
+                   pygame.transform.scale(pygame.image.load('__Pngs__/Emptybutton.png').convert_alpha(), (150, 100))]
 UnitButton = [UnitButtonSetup[AssignedButtonTypes[0]].get_rect(topleft=(100 + 25, 500 + 25)),
               UnitButtonSetup[AssignedButtonTypes[1]].get_rect(topleft=(250 + 25, 500 + 25)),
               UnitButtonSetup[AssignedButtonTypes[2]].get_rect(topleft=(400 + 25, 500 + 25)),
@@ -206,7 +210,7 @@ def StatReset():
 
 PlayMusic()
 StatReset()       
-menu = False
+menu = True
 running = True
 while running:
     for event in pygame.event.get():
@@ -224,7 +228,7 @@ while running:
         UnitOperations(UnitCount,Units,data,FrameRate,EnemyCount,Enemies,EnemyBaseHealth)
         Money = EnemyOperations(EnemyCount,Enemies,data,FrameRate,UnitCount,Units,UnitBaseHealth,Money)
         Draw(screen,data,Units,Enemies,UnitY,EnemyY,UnitCount,EnemyCount,DogHouse)
-        DrawButtons(screen,UnitButton,UnitButtonSetup,ButtonError,Cooldown,data,FrameRate,AssignedButtonTypes,JewButtonError,JewButtonSetup)
+        DrawButtons(screen,UnitButton,UnitButtonSetup,ButtonError,Cooldown,data,FrameRate,AssignedButtonTypes,JewButtonError,JewButtonSetup,True,StartButtonSetup)
         Cooldowns()
         textplacement(screen,data,Money,MoneyLimit,JewButtonLevel)
 
@@ -232,6 +236,8 @@ while running:
         pygame.mixer.music.pause()
         StatReset()
         menuappear(AssignedButtonTypes,data,screen,background)
+        DrawButtons(screen,UnitButton,UnitButtonSetup,ButtonError,Cooldown,data,FrameRate,AssignedButtonTypes,JewButtonError,JewButtonSetup,False,StartButtonSetup)
+                
     keys = pygame.key.get_pressed()
     pygame.display.flip()
     pygame.display.update()
