@@ -16,15 +16,17 @@ def Draw(screen,data,Units,Enemies,UnitY,EnemyY,UnitCount,EnemyCount,DogHouse):
     pygame.draw.rect(screen,BLACK,(0,UnitY+25,WIDTH,500))
     pygame.draw.rect(screen,WHITE,(935,600,175,90))
     screen.blit(DogHouse, (1010,100))
+    DrawPlaceholders(UnitCount,Units,screen,Enemies,data,EnemyY,EnemyCount,UnitY)
+    
+def DrawPlaceholders(UnitCount,Units,screen,Enemies,data,EnemyY,EnemyCount,UnitY):
     for i in range(UnitCount):
         if Units[i].UnitX > 0:
-
+    
             pygame.draw.rect(screen,BLACK,(Units[i].UnitX - data["Units"][Units[i].UnitType]["UnitSize"],UnitY - (2 * data["Units"][Units[i].UnitType]["UnitSize"]),data["Units"][Units[i].UnitType]["UnitSize"],2 * data["Units"][Units[i].UnitType]["UnitSize"]))
     for i in range(EnemyCount):
         if Enemies[i].EnemyX < WIDTH:
-
+    
             pygame.draw.rect(screen,BLACK,(Enemies[i].EnemyX,EnemyY - data["Enemy"][Enemies[i].EnemyType]["EnemySize"],data["Enemy"][Enemies[i].EnemyType]["EnemySize"],data["Enemy"][Enemies[i].EnemyType]["EnemySize"]))
-
 
 def DrawButtons(screen,UnitButton,UnitButtonSetup,ButtonError,Cooldown,data,FrameRate,AssignedButtonTypes,JewButtonError,JewButtonSetup,Playing,StartButtonSetup):
     pygame.draw.rect(screen,BLACK,(90,515,770,220))

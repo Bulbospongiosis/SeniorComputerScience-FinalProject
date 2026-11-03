@@ -15,8 +15,13 @@ class Unit:
                 pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (data["Units"][0]["UnitSize"], 2 * data["Units"][0]["UnitSize"]))]
     JohnAtk = [pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (data["Units"][0]["UnitSize"], 2 * data["Units"][0]["UnitSize"]))]
 
-    WalkAnimations = [JohnWalk]
-    AtkAnimations = [JohnAtk]
+    PatrickWalk = [pygame.transform.scale(pygame.image.load('Patrick/stand.png').convert_alpha(), (2*data["Units"][1]["UnitSize"], 5 * data["Units"][1]["UnitSize"])),
+                    pygame.transform.scale(pygame.image.load('Patrick/stand.png').convert_alpha(), (2*data["Units"][1]["UnitSize"], 5 * data["Units"][1]["UnitSize"]))]
+    PatrickAtk = [pygame.transform.scale(pygame.image.load('Patrick/stand.png').convert_alpha(), (2*data["Units"][1]["UnitSize"], 5 * data["Units"][1]["UnitSize"]))]
+    
+
+    WalkAnimations = [JohnWalk,PatrickWalk]
+    AtkAnimations = [JohnAtk,PatrickAtk]
 
 
     def __init__(self):
@@ -26,10 +31,15 @@ class Unit:
         self.UnitAtkAnimation = 0
         self.UnitCooldown = 0
         self.UnitHealth = 0
+        self.FrameRate = 60
 
     def drawWalk(self):
-        return self.WalkAnimation[self.UnitType][self.UnitAnimation]
+        frame_idx = int(self.UnitAnimation * 12 / self.FrameRate) % len(self.WalkAnimations[self.UnitType])
+        return self.WalkAnimations[self.UnitType][frame_idx]
+
     def drawAtk(self):
-            return self.AtkAnimation[self.UnitType][self.UnitAnimation]
+        frame_idx = int(self.UnitAtkAnimation * 12 / self.FrameRate) % len(self.AtkAnimations[self.UnitType])
+        return self.AtkAnimations[self.UnitType][frame_idx]
+
     def drawStand(self):
-            return self.AtkAnimation[self.UnitType][0]
+        return self.AtkAnimations[self.UnitType][0]

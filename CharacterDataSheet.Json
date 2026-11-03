@@ -18,6 +18,25 @@
             "UnitAttackType": "Single"
            
 
+        },
+        {
+            "Name": "Patrick",
+            "UnitHealth":25,
+            "UnitWalkFrames":1,
+            "UnitAtkFrames":0,
+            "UnitSpeed":5,
+            "UnitRange":20,
+            "UnitSize":20,
+            "UnitBlindspot":0,
+            "UnitPierce":0,
+            "UnitCooldown":10,
+            "UnitAtkCooldown":10,
+            "UnitPrice":100,
+            "UnitDamage":100,
+            "UnitPause": "True",
+            "UnitAttackType": "Single"
+           
+
         }
     ],
     "Enemy":[

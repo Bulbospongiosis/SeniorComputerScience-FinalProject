@@ -29,10 +29,15 @@ class Enemy:
         self.EnemyAtkAnimation = 0
         self.EnemyCooldown = 0
         self.EnemyHealth = 0
+        self.FrameRate = 60
 
     def drawWalk(self):
-        return self.EnemyWalkAnimation[self.EnemyType][self.EnemyAnimation]
+        frame_idx = int(self.EnemyAnimation * 12 / self.FrameRate) % len(self.EnemyWalkAnimations[self.EnemyType])
+        return self.EnemyWalkAnimations[self.EnemyType][frame_idx]
+
     def drawAtk(self):
-        return self.EnemyAtkAnimation[self.EnemyType][self.EnemyAnimation]
+        frame_idx = int(self.EnemyAtkAnimation * 12 / self.FrameRate) % len(self.EnemyAtkAnimations[self.EnemyType])
+        return self.EnemyAtkAnimations[self.EnemyType][frame_idx]
+
     def drawStand(self):
-        return self.EnemyAtkAnimation[self.EnemyType][0]
+        return self.EnemyAtkAnimations[self.EnemyType][0]

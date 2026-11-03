@@ -42,7 +42,7 @@ for i in range(UnitCount):
     Units.append(Unit())
 
 Cooldown = [999999999999999999] * 10
-AssignedButtonTypes = [0,0,0,0,0,0,0,0,0,0]
+AssignedButtonTypes = [1,0,0,0,0,0,0,0,0,0]
 ButtonError = [False] * 10
 ErrorCooldown = [0] * 10
 JewButtonError = False
@@ -210,7 +210,7 @@ def StatReset():
 
 PlayMusic()
 StatReset()       
-menu = True
+menu = False
 running = True
 while running:
     for event in pygame.event.get():
@@ -225,9 +225,9 @@ while running:
 
     if not menu:
         pygame.mixer.music.unpause()
-        UnitOperations(UnitCount,Units,data,FrameRate,EnemyCount,Enemies,EnemyBaseHealth)
-        Money = EnemyOperations(EnemyCount,Enemies,data,FrameRate,UnitCount,Units,UnitBaseHealth,Money)
-        Draw(screen,data,Units,Enemies,UnitY,EnemyY,UnitCount,EnemyCount,DogHouse)
+        Draw(screen,data,Units,Enemies,UnitY,EnemyY,UnitCount,EnemyCount,DogHouse)        
+        UnitOperations(UnitCount,Units,data,FrameRate,EnemyCount,Enemies,EnemyBaseHealth,screen,UnitY)
+        Money = EnemyOperations(EnemyCount,Enemies,data,FrameRate,UnitCount,Units,UnitBaseHealth,Money,screen,EnemyY)
         DrawButtons(screen,UnitButton,UnitButtonSetup,ButtonError,Cooldown,data,FrameRate,AssignedButtonTypes,JewButtonError,JewButtonSetup,True,StartButtonSetup)
         Cooldowns()
         textplacement(screen,data,Money,MoneyLimit,JewButtonLevel)
