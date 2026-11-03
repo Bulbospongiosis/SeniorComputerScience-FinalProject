@@ -4,7 +4,7 @@ WIDTH,HEIGHT = 1250,750
 
 def UnitOperations(UnitCount,Units,data,FrameRate,EnemyCount,Enemies,EnemyBaseHealth,screen,UnitY):
     for i in range(UnitCount):
-        unitSize = (Units[i].UnitX - data["Units"][Units[i].UnitType]["UnitSize"]/2, UnitY - data["Units"][Units[i].UnitType]["UnitSize"]/2)
+        unitSize = (Units[i].UnitX - data["Units"][Units[i].UnitType]["UnitSize"]/2, UnitY - data["Units"][Units[i].UnitType]["UnitSize"])
         if Units[i].UnitHealth <= 0:
             Units[i].UnitX = 0
         if Units[i].UnitCooldown >= 0:
@@ -61,7 +61,7 @@ def UnitOperations(UnitCount,Units,data,FrameRate,EnemyCount,Enemies,EnemyBaseHe
 
 def EnemyOperations(EnemyCount,Enemies,data,FrameRate,UnitCount,Units,UnitBaseHealth,Money,screen,EnemyY):
     for i in range(EnemyCount):
-        enemySize = (Enemies[i].EnemyX + data["Enemy"][Enemies[i].EnemyType]["EnemySize"]/2, EnemyY - data["Enemy"][Enemies[i].EnemyType]["EnemySize"]/2)
+        enemySize = (Enemies[i].EnemyX + data["Enemy"][Enemies[i].EnemyType]["EnemySize"]/2, EnemyY - data["Enemy"][Enemies[i].EnemyType]["EnemySize"])
         if Enemies[i].EnemyHealth <= 0:
             if Enemies[i].EnemyX < WIDTH:
                 Money += data["Enemy"][Enemies[i].EnemyType]["EnemyHealth"]
