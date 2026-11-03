@@ -13,10 +13,10 @@ screen = pygame.display.set_mode((WIDTH,HEIGHT))
 
 class Enemy:
     
-    DogTroopWalk = [pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (data["Enemy"][0]["EnemySize"], 2 * data["Enemy"][0]["EnemySize"])),
-                    pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (data["Enemy"][0]["EnemySize"], 2 * data["Enemy"][0]["EnemySize"]))]
-    DogTroopAtk = [pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (data["Enemy"][0]["EnemySize"], 2 * data["Enemy"][0]["EnemySize"])),
-                    pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (data["Enemy"][0]["EnemySize"], 2 * data["Enemy"][0]["EnemySize"]))]
+    DogTroopWalk = [pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (data["Enemy"][0]["EnemySize"], data["Enemy"][0]["EnemySize"])),
+                    pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (data["Enemy"][0]["EnemySize"], data["Enemy"][0]["EnemySize"]))]
+    DogTroopAtk = [pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (data["Enemy"][0]["EnemySize"], data["Enemy"][0]["EnemySize"])),
+                    pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (data["Enemy"][0]["EnemySize"], data["Enemy"][0]["EnemySize"]))]
 
     EnemyWalkAnimations = [DogTroopWalk]
     EnemyAtkAnimations = [DogTroopAtk]

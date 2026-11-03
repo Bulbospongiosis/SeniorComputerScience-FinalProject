@@ -11,13 +11,13 @@ WIDTH,HEIGHT = 1250,750
 screen = pygame.display.set_mode((WIDTH,HEIGHT))
 class Unit:
 
-    JohnWalk = [pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (data["Units"][0]["UnitSize"], 2 * data["Units"][0]["UnitSize"])),
-                pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (data["Units"][0]["UnitSize"], 2 * data["Units"][0]["UnitSize"]))]
-    JohnAtk = [pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (data["Units"][0]["UnitSize"], 2 * data["Units"][0]["UnitSize"]))]
+    JohnWalk = [pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (data["Units"][0]["UnitSize"], data["Units"][0]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (data["Units"][0]["UnitSize"], data["Units"][0]["UnitSize"]))]
+    JohnAtk = [pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (data["Units"][0]["UnitSize"], data["Units"][0]["UnitSize"]))]
 
-    PatrickWalk = [pygame.transform.scale(pygame.image.load('Patrick/stand.png').convert_alpha(), (2*data["Units"][1]["UnitSize"], 5 * data["Units"][1]["UnitSize"])),
-                    pygame.transform.scale(pygame.image.load('Patrick/stand.png').convert_alpha(), (2*data["Units"][1]["UnitSize"], 5 * data["Units"][1]["UnitSize"]))]
-    PatrickAtk = [pygame.transform.scale(pygame.image.load('Patrick/stand.png').convert_alpha(), (2*data["Units"][1]["UnitSize"], 5 * data["Units"][1]["UnitSize"]))]
+    PatrickWalk = [pygame.transform.scale(pygame.image.load('Patrick/stand.png').convert_alpha(), (data["Units"][1]["UnitSize"], data["Units"][1]["UnitSize"])),
+                    pygame.transform.scale(pygame.image.load('Patrick/stand.png').convert_alpha(), (data["Units"][1]["UnitSize"], data["Units"][1]["UnitSize"]))]
+    PatrickAtk = [pygame.transform.scale(pygame.image.load('Patrick/stand.png').convert_alpha(), (data["Units"][1]["UnitSize"], data["Units"][1]["UnitSize"]))]
     
 
     WalkAnimations = [JohnWalk,PatrickWalk]
