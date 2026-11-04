@@ -1,3 +1,4 @@
+
 import pygame
 import os
 import sys
@@ -79,7 +80,7 @@ DogHouse = pygame.transform.scale(pygame.image.load('__Pngs__/doghouse.png').con
 JewButtonSetup = pygame.transform.scale(pygame.image.load('__Pngs__/JewButton.png').convert_alpha(), (240, 240))
 JewButton = JewButtonSetup.get_rect(topleft=(900+25,500+25))
 StartButtonSetup = pygame.transform.scale(pygame.image.load('__Pngs__/Startbutton.png').convert_alpha(), (240, 240))
-StartButton = JewButtonSetup.get_rect(topleft=(900+25,500+25))
+StartButton = StartButtonSetup.get_rect(topleft=(900+25,500+25))
 UnitButtonSetup = [pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (150, 100)),
                    pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (150, 100)),
                    pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (150, 100)),
@@ -175,7 +176,7 @@ def PlayMusic():
     pygame.mixer.music.play(-1)
 
 def StatReset():
-    global Cooldown, ButtonError, ErrorCooldown, Money, BaseMoneySpeed, MoneyLimit, JewButtonLevel, NextAvailableUnit, NextAvailableEnemy
+    global Cooldown, ButtonError, ErrorCooldown, Money, BaseMoneySpeed, MoneyLimit, JewButtonLevel, NextAvailableUnit, NextAvailableEnemy, UnitBaseHealth, EnemyBaseHealth
     for i in range(UnitCount):
         Units[i].UnitX = 0
         Units[i].UnitHealth = 0
@@ -204,28 +205,36 @@ def StatReset():
     NextAvailableEnemy = 0
 
     Enemies[0].EnemyX = WIDTH - 10
-    Enemies[0].EnemyHealth = data["Enemy"][Enemies[i].EnemyType]["EnemyHealth"]
+    Enemies[0].EnemyHealth = data["Enemy"][Enemies[0].EnemyType]["EnemyHealth"]
     Enemies[0].EnemyType = 0
 
 
 PlayMusic()
-StatReset()       
+StatReset()
 menu = True
 running = True
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+
         if event.type == pygame.MOUSEBUTTONUP:
-            Button(pygame.mouse.get_pos(),False,-1000)
+            if menu:
+                if StartButton.collidepoint(event.pos):
+                    menu = False
+                    StatReset()
+                    pygame.mixer.music.unpause()
+            else:
+                Button(event.pos,False,-1000)
+
         if event.type == pygame.KEYDOWN:
-            if event.unicode.isdigit():
+            if not menu and event.unicode.isdigit():
                 Button((-100,-100),True,int(event.unicode))
 
 
     if not menu:
         pygame.mixer.music.unpause()
-        Draw(screen,data,Units,Enemies,UnitY,EnemyY,UnitCount,EnemyCount,DogHouse)        
+        Draw(screen,data,Units,Enemies,UnitY,EnemyY,UnitCount,EnemyCount,DogHouse)
         UnitOperations(UnitCount,Units,data,FrameRate,EnemyCount,Enemies,EnemyBaseHealth,screen,UnitY)
         Money = EnemyOperations(EnemyCount,Enemies,data,FrameRate,UnitCount,Units,UnitBaseHealth,Money,screen,EnemyY)
         DrawButtons(screen,UnitButton,UnitButtonSetup,ButtonError,Cooldown,data,FrameRate,AssignedButtonTypes,JewButtonError,JewButtonSetup,True,StartButtonSetup)
@@ -234,14 +243,15 @@ while running:
 
     else:
         pygame.mixer.music.pause()
-        StatReset()
+
         menuappear(AssignedButtonTypes,data,screen,background)
+
         DrawButtons(screen,UnitButton,UnitButtonSetup,ButtonError,Cooldown,data,FrameRate,AssignedButtonTypes,JewButtonError,JewButtonSetup,False,StartButtonSetup)
-                
+
     keys = pygame.key.get_pressed()
     pygame.display.flip()
-    pygame.display.update()
     clock.tick(FrameRate)
+
 pygame.quit()
 pygame.mixer.quit()
 sys.exit()

@@ -61,7 +61,7 @@ def UnitOperations(UnitCount,Units,data,FrameRate,EnemyCount,Enemies,EnemyBaseHe
 
 def EnemyOperations(EnemyCount,Enemies,data,FrameRate,UnitCount,Units,UnitBaseHealth,Money,screen,EnemyY):
     for i in range(EnemyCount):
-        enemySize = (Enemies[i].EnemyX + data["Enemy"][Enemies[i].EnemyType]["EnemySize"]/2, EnemyY - data["Enemy"][Enemies[i].EnemyType]["EnemySize"])
+        enemySize = (Enemies[i].EnemyX - data["Enemy"][Enemies[i].EnemyType]["EnemySize"]/2, EnemyY - data["Enemy"][Enemies[i].EnemyType]["EnemySize"])
         if Enemies[i].EnemyHealth <= 0:
             if Enemies[i].EnemyX < WIDTH:
                 Money += data["Enemy"][Enemies[i].EnemyType]["EnemyHealth"]
