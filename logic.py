@@ -4,13 +4,16 @@ WIDTH,HEIGHT = 1250,750
 
 def UnitOperations(UnitCount,Units,data,FrameRate,EnemyCount,Enemies,EnemyBaseHealth,screen,UnitY):
     for i in range(UnitCount):
-        unitSize = (Units[i].UnitX - data["Units"][Units[i].UnitType]["UnitSize"], UnitY - data["Units"][Units[i].UnitType]["UnitSize"])
+        unitSize = (Units[i].UnitX - data["Units"][Units[i].UnitType]["UnitSize"] + data["Units"][Units[i].UnitType]["UnitPierce"], UnitY - data["Units"][Units[i].UnitType]["UnitSize"])
+        ticks_per_frame = max(1, FrameRate // 12)
+        max_post_ticks = len(Units[i].PostAnimations[Units[i].UnitType]) * ticks_per_frame
+                            
         if Units[i].UnitHealth <= 0:
             Units[i].UnitX = 0
         if Units[i].UnitCooldown >= 0:
             Units[i].UnitCooldown -= 1
-        if (Units[i].UnitCooldown <= 0 and data["Units"][Units[i].UnitType]["UnitPause"] == "True") or data["Units"][Units[i].UnitType]["UnitPause"] == "False":
-            if (Units[i].UnitX + 120 < WIDTH - data["Units"][Units[i].UnitType]["UnitRange"] and abs(Units[i].UnitX - FrontmostEnemy(Enemies,EnemyCount)) > data["Units"][Units[i].UnitType]["UnitRange"]) and Units[i].UnitX > 0:
+        if (Units[i].UnitCooldown <= 0 and data["Units"][Units[i].UnitType]["UnitPause"] == "True") or (data["Units"][Units[i].UnitType]["UnitPause"] == "False" and Units[i].UnitPostAnimation >= max_post_ticks - 1):
+            if (Units[i].UnitX + 120 < WIDTH - Units[i].Range and abs(Units[i].UnitX - FrontmostEnemy(Enemies,EnemyCount)) > Units[i].Range) and Units[i].UnitX > 0:
 
                 Units[i].UnitX += data["Units"][Units[i].UnitType]["UnitSpeed"]*24/FrameRate
                 Units[i].UnitAtkAnimation = 0
@@ -27,7 +30,8 @@ def UnitOperations(UnitCount,Units,data,FrameRate,EnemyCount,Enemies,EnemyBaseHe
                     if Units[i].UnitAtkAnimation >= max_atk_ticks - 1:
                         Units[i].UnitCooldown = data["Units"][Units[i].UnitType]["UnitAtkCooldown"]*FrameRate
                         Units[i].UnitAtkAnimation = 0
-                        screen.blit(Units[i].drawStand(),unitSize)
+                        Units[i].UnitPostAnimation = 0
+                        screen.blit(Units[i].drawPost(),unitSize)
                                         
 
                         if data["Units"][Units[i].UnitType]["UnitAttackType"] == "Area":
@@ -52,11 +56,20 @@ def UnitOperations(UnitCount,Units,data,FrameRate,EnemyCount,Enemies,EnemyBaseHe
                         screen.blit(Units[i].drawAtk(),unitSize)
                                         
                 else:
-                    Units[i].UnitAtkAnimation = 0
-                    screen.blit(Units[i].drawStand(),unitSize)
+                    if Units[i].UnitPostAnimation >= max_post_ticks - 1:
+                        Units[i].UnitAtkAnimation = 0
+                        screen.blit(Units[i].drawStand(),unitSize)
+                    else:
+                        screen.blit(Units[i].drawPost(),unitSize)
+                        Units[i].UnitPostAnimation += 1
+
         else:
-            Units[i].UnitAtkAnimation = 0
-            screen.blit(Units[i].drawStand(),unitSize)
+            if Units[i].UnitPostAnimation >= max_post_ticks - 1:
+                Units[i].UnitAtkAnimation = 0
+                screen.blit(Units[i].drawStand(),unitSize)
+            else:
+                screen.blit(Units[i].drawPost(),unitSize)
+                Units[i].UnitPostAnimation += 1
                                     
 
 def EnemyOperations(EnemyCount,Enemies,data,FrameRate,UnitCount,Units,UnitBaseHealth,Money,screen,EnemyY):

@@ -3,8 +3,6 @@
         {
             "Name": "John",
             "UnitHealth":25,
-            "UnitWalkFrames":1,
-            "UnitAtkFrames":0,
             "UnitSpeed":40,
             "UnitRange":20,
             "UnitSize":20,
@@ -22,8 +20,6 @@
         {
             "Name": "Cat",
             "UnitHealth":25,
-            "UnitWalkFrames":1,
-            "UnitAtkFrames":0,
             "UnitSpeed":2,
             "UnitRange":20,
             "UnitSize":50,
@@ -37,6 +33,23 @@
             "UnitAttackType": "Single"
            
 
+        },
+        {
+            "Name": "Tank",
+            "UnitHealth":100,
+            "UnitSpeed":1,
+            "UnitRange":0,
+            "UnitSize":100,
+            "UnitBlindspot":0,
+            "UnitPierce":25,
+            "UnitCooldown":3,
+            "UnitAtkCooldown":2,
+            "UnitPrice":75,
+            "UnitDamage":5,
+            "UnitPause": "False",
+            "UnitAttackType": "Area"
+           
+
         }
     ],
     "Enemy":[
@@ -44,8 +57,8 @@
             "EnemyHealth":100,
             "EnemyWalkFrames":12,
             "EnemyAtkFrames":5,
-            "EnemySpeed":5,
-            "EnemyRange":400,
+            "EnemySpeed":10,
+            "EnemyRange":10,
             "EnemySize":50, 
             "EnemyBlindspot":0,
             "EnemyPierce":0,

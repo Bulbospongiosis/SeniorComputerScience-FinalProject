@@ -40,10 +40,10 @@ UnitBaseHealth = 5000
 UnitY = HEIGHT - 275
 Units = []
 for i in range(UnitCount):
-    Units.append(Unit())
+    Units.append(Unit(data))
 
 Cooldown = [999999999999999999] * 10
-AssignedButtonTypes = [1,0,0,0,0,0,0,0,0,0]
+AssignedButtonTypes = [1,2,0,0,0,0,0,0,0,0]
 ButtonError = [False] * 10
 ErrorCooldown = [0] * 10
 JewButtonError = False
