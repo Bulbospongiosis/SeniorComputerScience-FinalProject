@@ -20,20 +20,20 @@
 
         },
         {
-            "Name": "Patrick",
+            "Name": "Cat",
             "UnitHealth":25,
             "UnitWalkFrames":1,
             "UnitAtkFrames":0,
-            "UnitSpeed":5,
+            "UnitSpeed":2,
             "UnitRange":20,
-            "UnitSize":20,
+            "UnitSize":50,
             "UnitBlindspot":0,
             "UnitPierce":0,
-            "UnitCooldown":10,
-            "UnitAtkCooldown":10,
-            "UnitPrice":100,
-            "UnitDamage":100,
-            "UnitPause": "True",
+            "UnitCooldown":2,
+            "UnitAtkCooldown":2,
+            "UnitPrice":50,
+            "UnitDamage":10,
+            "UnitPause": "False",
             "UnitAttackType": "Single"
            
 
@@ -52,7 +52,7 @@
             "EnemyCooldown":3,
             "EnemyAtkCooldown":1,
             "EnemyPrice":10,
-            "EnemyDamage":10,
+            "EnemyDamage":0,
             "EnemyPause": "False",
             "EnemyAttackType": "Area"
         }

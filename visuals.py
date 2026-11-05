@@ -13,10 +13,11 @@ WIDTH,HEIGHT = 1250,750
 
 def Draw(screen,data,Units,Enemies,UnitY,EnemyY,UnitCount,EnemyCount,DogHouse):
     screen.fill(WHITE)
+    screen.blit(DogHouse, (1010,100))
     pygame.draw.rect(screen,BLACK,(0,UnitY+25,WIDTH,500))
     pygame.draw.rect(screen,WHITE,(935,600,175,90))
-    screen.blit(DogHouse, (1010,100))
-    DrawPlaceholders(UnitCount,Units,screen,Enemies,data,EnemyY,EnemyCount,UnitY)
+    
+    #DrawPlaceholders(UnitCount,Units,screen,Enemies,data,EnemyY,EnemyCount,UnitY)
     
 def DrawPlaceholders(UnitCount,Units,screen,Enemies,data,EnemyY,EnemyCount,UnitY):
     for i in range(UnitCount):

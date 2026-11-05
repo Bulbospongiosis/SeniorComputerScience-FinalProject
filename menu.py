@@ -17,7 +17,7 @@ def menuappear(AssignedButtonTypes, data, screen, background):
     WIDTH, HEIGHT = screen.get_size()
 
     # Game title
-    title = TITLE_FONT.render("BATTLE CLASS", True, WHITE)
+    title = TITLE_FONT.render("BATTLE KATS", True, WHITE)
     screen.blit(title, title.get_rect(center=(WIDTH // 2, 65)))
 
     # Title underline
@@ -28,4 +28,4 @@ def menuappear(AssignedButtonTypes, data, screen, background):
     screen.blit(heading, heading.get_rect(center=(500, 465)))
 
     # Character selection border
-    pygame.draw.rect(screen, BLUE, (110, 510, 780, 225), 2)
+    pygame.draw.rect(screen, BLUE, (85, 510, 780, 232), 2)

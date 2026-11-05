@@ -15,13 +15,25 @@ class Unit:
                 pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (data["Units"][0]["UnitSize"], data["Units"][0]["UnitSize"]))]
     JohnAtk = [pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (data["Units"][0]["UnitSize"], data["Units"][0]["UnitSize"]))]
 
-    PatrickWalk = [pygame.transform.scale(pygame.image.load('Patrick/stand.png').convert_alpha(), (data["Units"][1]["UnitSize"], data["Units"][1]["UnitSize"])),
-                    pygame.transform.scale(pygame.image.load('Patrick/stand.png').convert_alpha(), (data["Units"][1]["UnitSize"], data["Units"][1]["UnitSize"]))]
-    PatrickAtk = [pygame.transform.scale(pygame.image.load('Patrick/stand.png').convert_alpha(), (data["Units"][1]["UnitSize"], data["Units"][1]["UnitSize"]))]
+    CatWalk = [pygame.transform.scale(pygame.image.load('Cat/cat0.png').convert_alpha(), (data["Units"][1]["UnitSize"], data["Units"][1]["UnitSize"])),
+                    pygame.transform.scale(pygame.image.load('Cat/cat1.png').convert_alpha(), (data["Units"][1]["UnitSize"], data["Units"][1]["UnitSize"])),
+                    pygame.transform.scale(pygame.image.load('Cat/cat2.png').convert_alpha(), (data["Units"][1]["UnitSize"], data["Units"][1]["UnitSize"])),
+                    pygame.transform.scale(pygame.image.load('Cat/cat3.png').convert_alpha(), (data["Units"][1]["UnitSize"], data["Units"][1]["UnitSize"])),
+                    pygame.transform.scale(pygame.image.load('Cat/cat4.png').convert_alpha(), (data["Units"][1]["UnitSize"], data["Units"][1]["UnitSize"])),
+                    pygame.transform.scale(pygame.image.load('Cat/cat5.png').convert_alpha(), (data["Units"][1]["UnitSize"], data["Units"][1]["UnitSize"])),
+                    pygame.transform.scale(pygame.image.load('Cat/cat6.png').convert_alpha(), (data["Units"][1]["UnitSize"], data["Units"][1]["UnitSize"]))]
+                        
+    CatAtk = [pygame.transform.scale(pygame.image.load('Cat/cattack0.png').convert_alpha(), (data["Units"][1]["UnitSize"], data["Units"][1]["UnitSize"])),
+              pygame.transform.scale(pygame.image.load('Cat/cattack1.png').convert_alpha(), (data["Units"][1]["UnitSize"], data["Units"][1]["UnitSize"])),
+              pygame.transform.scale(pygame.image.load('Cat/cattack2.png').convert_alpha(), (data["Units"][1]["UnitSize"], data["Units"][1]["UnitSize"])),
+              pygame.transform.scale(pygame.image.load('Cat/cattack3.png').convert_alpha(), (data["Units"][1]["UnitSize"], data["Units"][1]["UnitSize"])),
+              pygame.transform.scale(pygame.image.load('Cat/cattack4.png').convert_alpha(), (data["Units"][1]["UnitSize"], data["Units"][1]["UnitSize"])),
+              pygame.transform.scale(pygame.image.load('Cat/cattack5.png').convert_alpha(), (data["Units"][1]["UnitSize"], data["Units"][1]["UnitSize"])),
+              pygame.transform.scale(pygame.image.load('Cat/cattack6.png').convert_alpha(), (data["Units"][1]["UnitSize"], data["Units"][1]["UnitSize"]))]
     
 
-    WalkAnimations = [JohnWalk,PatrickWalk]
-    AtkAnimations = [JohnAtk,PatrickAtk]
+    WalkAnimations = [JohnWalk,CatWalk]
+    AtkAnimations = [JohnAtk,CatAtk]
 
 
     def __init__(self):
