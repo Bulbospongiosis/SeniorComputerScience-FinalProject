@@ -91,11 +91,42 @@ class Unit:
                     pygame.transform.scale(pygame.image.load('Diva/divaatk15.png').convert_alpha(), (data["Units"][3]["UnitSize"], data["Units"][3]["UnitSize"])),                                              
                     pygame.transform.scale(pygame.image.load('Diva/divaatk15.png').convert_alpha(), (data["Units"][3]["UnitSize"], data["Units"][3]["UnitSize"])),                           
                     pygame.transform.scale(pygame.image.load('Diva/divaatk16.png').convert_alpha(), (data["Units"][3]["UnitSize"], data["Units"][3]["UnitSize"]))]                       
+
+##########################################################
+    BombWalk = [pygame.transform.scale(pygame.image.load('Bomb/bomb0.png').convert_alpha(), (data["Units"][4]["UnitSize"], data["Units"][4]["UnitSize"])),
+                    pygame.transform.scale(pygame.image.load('Bomb/bomb1.png').convert_alpha(), (data["Units"][4]["UnitSize"], data["Units"][4]["UnitSize"])),
+                    pygame.transform.scale(pygame.image.load('Bomb/bomb2.png').convert_alpha(), (data["Units"][4]["UnitSize"], data["Units"][4]["UnitSize"])),
+                    pygame.transform.scale(pygame.image.load('Bomb/bomb3.png').convert_alpha(), (data["Units"][4]["UnitSize"], data["Units"][4]["UnitSize"])),
+                    pygame.transform.scale(pygame.image.load('Bomb/bomb4.png').convert_alpha(), (data["Units"][4]["UnitSize"], data["Units"][4]["UnitSize"]))
+                    ]
+                        
+    BombAtk = [pygame.transform.scale(pygame.image.load('Bomb/bombatk00.png').convert_alpha(), (data["Units"][4]["UnitSize"], data["Units"][4]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Bomb/bombatk01.png').convert_alpha(), (data["Units"][4]["UnitSize"], data["Units"][4]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Bomb/bombatk02.png').convert_alpha(), (data["Units"][4]["UnitSize"], data["Units"][4]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Bomb/bombatk03.png').convert_alpha(), (data["Units"][4]["UnitSize"], data["Units"][4]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Bomb/bombatk04.png').convert_alpha(), (data["Units"][4]["UnitSize"], data["Units"][4]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Bomb/bombatk05.png').convert_alpha(), (data["Units"][4]["UnitSize"], data["Units"][4]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Bomb/bombatk06.png').convert_alpha(), (data["Units"][4]["UnitSize"], data["Units"][4]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Bomb/bombatk07.png').convert_alpha(), (data["Units"][4]["UnitSize"], data["Units"][4]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Bomb/bombatk08.png').convert_alpha(), (data["Units"][4]["UnitSize"], data["Units"][4]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Bomb/bombatk09.png').convert_alpha(), (data["Units"][4]["UnitSize"], data["Units"][4]["UnitSize"])),
+                                ]
+                
+    BombPost = [pygame.transform.scale(pygame.image.load('Bomb/bombatk10.png').convert_alpha(), (data["Units"][4]["UnitSize"], data["Units"][4]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Bomb/bombatk11.png').convert_alpha(), (data["Units"][4]["UnitSize"], data["Units"][4]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Bomb/bombatk12.png').convert_alpha(), (data["Units"][4]["UnitSize"], data["Units"][4]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Bomb/bombatk13.png').convert_alpha(), (data["Units"][4]["UnitSize"], data["Units"][4]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Bomb/bombatk14.png').convert_alpha(), (data["Units"][4]["UnitSize"], data["Units"][4]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Bomb/bombatk15.png').convert_alpha(), (data["Units"][4]["UnitSize"], data["Units"][4]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Bomb/bombatk16.png').convert_alpha(), (data["Units"][4]["UnitSize"], data["Units"][4]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Bomb/bombatk17.png').convert_alpha(), (data["Units"][4]["UnitSize"], data["Units"][4]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Bomb/bombatk18.png').convert_alpha(), (data["Units"][4]["UnitSize"], data["Units"][4]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Bomb/bombatk19.png').convert_alpha(), (data["Units"][4]["UnitSize"], data["Units"][4]["UnitSize"]))]                       
                     
 
-    WalkAnimations = [JohnWalk,CatWalk,TankWalk,DivaWalk]
-    AtkAnimations = [JohnAtk,CatAtk,TankAtk,DivaAtk]
-    PostAnimations = [JohnPost,CatPost,TankPost,DivaPost]
+    WalkAnimations = [JohnWalk,CatWalk,TankWalk,DivaWalk,BombWalk]
+    AtkAnimations = [JohnAtk,CatAtk,TankAtk,DivaAtk,BombAtk]
+    PostAnimations = [JohnPost,CatPost,TankPost,DivaPost,BombPost]
 
     def __init__(self,data):
         self.UnitX = 0
