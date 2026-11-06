@@ -43,7 +43,7 @@ for i in range(UnitCount):
     Units.append(Unit(data))
 
 Cooldown = [999999999999999999] * 10
-AssignedButtonTypes = [1,2,0,0,0,0,0,0,0,0]
+AssignedButtonTypes = [1,2,3,0,0,0,0,0,0,0]
 ButtonError = [False] * 10
 ErrorCooldown = [0] * 10
 JewButtonError = False
@@ -126,6 +126,7 @@ def Button(position,numberclicked,unicode):
             Money -= data["Units"][AssignedButtonTypes[i]]["UnitPrice"]
             Units[NextAvailableUnit].UnitHealth = data["Units"][AssignedButtonTypes[i]]["UnitHealth"]
             Units[NextAvailableUnit].UnitCooldown = 0
+            Units[NextAvailableUnit].spawn()
             NextAvailableUnit += 1
             while True:
                 if Units[NextAvailableUnit].UnitX == 0:

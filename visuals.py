@@ -17,13 +17,15 @@ def Draw(screen,data,Units,Enemies,UnitY,EnemyY,UnitCount,EnemyCount,DogHouse):
     pygame.draw.rect(screen,BLACK,(0,UnitY+25,WIDTH,500))
     pygame.draw.rect(screen,WHITE,(935,600,175,90))
     
-    #DrawPlaceholders(UnitCount,Units,screen,Enemies,data,EnemyY,EnemyCount,UnitY)
+    DrawPlaceholders(UnitCount,Units,screen,Enemies,data,EnemyY,EnemyCount,UnitY)
     
 def DrawPlaceholders(UnitCount,Units,screen,Enemies,data,EnemyY,EnemyCount,UnitY):
     for i in range(UnitCount):
         if Units[i].UnitX > 0:
-    
-            pygame.draw.rect(screen,BLACK,(Units[i].UnitX - data["Units"][Units[i].UnitType]["UnitSize"],UnitY - (2 * data["Units"][Units[i].UnitType]["UnitSize"]),data["Units"][Units[i].UnitType]["UnitSize"],2 * data["Units"][Units[i].UnitType]["UnitSize"]))
+            pygame.draw.rect(screen,RED,(Units[i].UnitX + data["Units"][Units[i].UnitType]["UnitBlindspot"],UnitY,5,5))
+            pygame.draw.rect(screen,BLACK,(Units[i].UnitX,UnitY,5,5))
+            pygame.draw.rect(screen,GREEN,(Units[i].UnitX + Units[i].Range + data["Units"][Units[i].UnitType]["UnitPierce"],UnitY,5,5))
+            
     for i in range(EnemyCount):
         if Enemies[i].EnemyX < WIDTH:
     

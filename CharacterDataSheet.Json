@@ -21,7 +21,7 @@
             "Name": "Cat",
             "UnitHealth":25,
             "UnitSpeed":2,
-            "UnitRange":20,
+            "UnitRange":10,
             "UnitSize":50,
             "UnitBlindspot":0,
             "UnitPierce":0,
@@ -38,10 +38,10 @@
             "Name": "Tank",
             "UnitHealth":100,
             "UnitSpeed":1,
-            "UnitRange":0,
+            "UnitRange":40,
             "UnitSize":100,
             "UnitBlindspot":0,
-            "UnitPierce":25,
+            "UnitPierce":0,
             "UnitCooldown":3,
             "UnitAtkCooldown":2,
             "UnitPrice":75,
@@ -50,22 +50,40 @@
             "UnitAttackType": "Area"
            
 
+        },
+        {
+            "Name": "Diva",
+            "UnitHealth":150,
+            "UnitSpeed":6,
+            "UnitRange":100,
+            "UnitSize":200,
+            "UnitBlindspot":35,
+            "UnitPierce":0,
+            "UnitCooldown":10,
+            "UnitAtkCooldown":3,
+            "UnitPrice":150,
+            "UnitDamage":30,
+            "UnitPause": "True",
+            "UnitAttackType": "Single"
+           
+
         }
+
     ],
     "Enemy":[
         {
             "EnemyHealth":100,
             "EnemyWalkFrames":12,
             "EnemyAtkFrames":5,
-            "EnemySpeed":10,
-            "EnemyRange":10,
+            "EnemySpeed":5,
+            "EnemyRange":5,
             "EnemySize":50, 
             "EnemyBlindspot":0,
             "EnemyPierce":0,
             "EnemyCooldown":3,
             "EnemyAtkCooldown":1,
             "EnemyPrice":10,
-            "EnemyDamage":0,
+            "EnemyDamage":1,
             "EnemyPause": "False",
             "EnemyAttackType": "Area"
         }

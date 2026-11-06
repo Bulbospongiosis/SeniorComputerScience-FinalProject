@@ -4,7 +4,7 @@ WIDTH,HEIGHT = 1250,750
 
 def UnitOperations(UnitCount,Units,data,FrameRate,EnemyCount,Enemies,EnemyBaseHealth,screen,UnitY):
     for i in range(UnitCount):
-        unitSize = (Units[i].UnitX - data["Units"][Units[i].UnitType]["UnitSize"] + data["Units"][Units[i].UnitType]["UnitPierce"], UnitY - data["Units"][Units[i].UnitType]["UnitSize"])
+        unitSize = (Units[i].UnitX - data["Units"][Units[i].UnitType]["UnitSize"] + Units[i].Range + data["Units"][Units[i].UnitType]["UnitPierce"], UnitY - data["Units"][Units[i].UnitType]["UnitSize"])
         ticks_per_frame = max(1, FrameRate // 12)
         max_post_ticks = len(Units[i].PostAnimations[Units[i].UnitType]) * ticks_per_frame
                             
@@ -35,17 +35,17 @@ def UnitOperations(UnitCount,Units,data,FrameRate,EnemyCount,Enemies,EnemyBaseHe
                                         
 
                         if data["Units"][Units[i].UnitType]["UnitAttackType"] == "Area":
-                            if Units[i].UnitX + 120 >= WIDTH - data["Units"][Units[i].UnitType]["UnitRange"]:
+                            if Units[i].UnitX + 120 >= WIDTH - Units[i].Range:
                                 EnemyBaseHealth -= data["Units"][Units[i].UnitType]["UnitDamage"]
                             for j in range(EnemyCount):
-                                if Enemies[j].EnemyX <= Units[i].UnitX + data["Units"][Units[i].UnitType]["UnitRange"] + data["Units"][Units[i].UnitType]["UnitPierce"] and Enemies[j].EnemyX >= Units[i].UnitX + data["Units"][Units[i].UnitType]["UnitBlindspot"]:
+                                if Enemies[j].EnemyX <= Units[i].UnitX + Units[i].Range + data["Units"][Units[i].UnitType]["UnitPierce"] and Enemies[j].EnemyX >= Units[i].UnitX + data["Units"][Units[i].UnitType]["UnitBlindspot"]:
                                     Enemies[j].EnemyHealth -= data["Units"][Units[i].UnitType]["UnitDamage"]
 
                         elif data["Units"][Units[i].UnitType]["UnitAttackType"] == "Single":
-                            if Units[i].UnitX + 120 >= WIDTH - data["Units"][Units[i].UnitType]["UnitRange"] and FrontmostEnemy(Enemies,EnemyCount) > WIDTH - 120:
+                            if Units[i].UnitX + 120 >= WIDTH - Units[i].Range and FrontmostEnemy(Enemies,EnemyCount) > WIDTH - 120:
                                 EnemyBaseHealth -= data["Units"][Units[i].UnitType]["UnitDamage"]
                             for j in range(EnemyCount):
-                                if Enemies[j].EnemyX <= Units[i].UnitX + data["Units"][Units[i].UnitType]["UnitRange"] + data["Units"][Units[i].UnitType]["UnitPierce"] and Enemies[j].EnemyX >= Units[i].UnitX + data["Units"][Units[i].UnitType]["UnitBlindspot"]:
+                                if Enemies[j].EnemyX <= Units[i].UnitX + Units[i].Range + data["Units"][Units[i].UnitType]["UnitPierce"] and Enemies[j].EnemyX >= Units[i].UnitX + data["Units"][Units[i].UnitType]["UnitBlindspot"]:
                                     if Enemies[j].EnemyX == FrontmostEnemy(Enemies,EnemyCount):
                                         Enemies[j].EnemyHealth -= data["Units"][Units[i].UnitType]["UnitDamage"]
                                         break

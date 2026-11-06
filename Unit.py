@@ -58,10 +58,44 @@ class Unit:
                 pygame.transform.scale(pygame.image.load('Tank/tankatk6.png').convert_alpha(), (data["Units"][2]["UnitSize"], data["Units"][2]["UnitSize"])),
                 pygame.transform.scale(pygame.image.load('Tank/tankatk7.png').convert_alpha(), (data["Units"][2]["UnitSize"], data["Units"][2]["UnitSize"]))]
 
+##########################################################
+    DivaWalk = [pygame.transform.scale(pygame.image.load('Diva/diva0.png').convert_alpha(), (data["Units"][3]["UnitSize"], data["Units"][3]["UnitSize"])),
+                    pygame.transform.scale(pygame.image.load('Diva/diva1.png').convert_alpha(), (data["Units"][3]["UnitSize"], data["Units"][3]["UnitSize"])),
+                    pygame.transform.scale(pygame.image.load('Diva/diva2.png').convert_alpha(), (data["Units"][3]["UnitSize"], data["Units"][3]["UnitSize"])),
+                    pygame.transform.scale(pygame.image.load('Diva/diva3.png').convert_alpha(), (data["Units"][3]["UnitSize"], data["Units"][3]["UnitSize"])),
+                    pygame.transform.scale(pygame.image.load('Diva/diva4.png').convert_alpha(), (data["Units"][3]["UnitSize"], data["Units"][3]["UnitSize"])),
+                    pygame.transform.scale(pygame.image.load('Diva/diva5.png').convert_alpha(), (data["Units"][3]["UnitSize"], data["Units"][3]["UnitSize"])),
+                    pygame.transform.scale(pygame.image.load('Diva/diva6.png').convert_alpha(), (data["Units"][3]["UnitSize"], data["Units"][3]["UnitSize"])),
+                    pygame.transform.scale(pygame.image.load('Diva/diva7.png').convert_alpha(), (data["Units"][3]["UnitSize"], data["Units"][3]["UnitSize"]))]
+                        
+    DivaAtk = [pygame.transform.scale(pygame.image.load('Diva/divaatk00.png').convert_alpha(), (data["Units"][3]["UnitSize"], data["Units"][3]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Diva/divaatk01.png').convert_alpha(), (data["Units"][3]["UnitSize"], data["Units"][3]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Diva/divaatk02.png').convert_alpha(), (data["Units"][3]["UnitSize"], data["Units"][3]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Diva/divaatk03.png').convert_alpha(), (data["Units"][3]["UnitSize"], data["Units"][3]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Diva/divaatk04.png').convert_alpha(), (data["Units"][3]["UnitSize"], data["Units"][3]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Diva/divaatk05.png').convert_alpha(), (data["Units"][3]["UnitSize"], data["Units"][3]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Diva/divaatk06.png').convert_alpha(), (data["Units"][3]["UnitSize"], data["Units"][3]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Diva/divaatk07.png').convert_alpha(), (data["Units"][3]["UnitSize"], data["Units"][3]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Diva/divaatk08.png').convert_alpha(), (data["Units"][3]["UnitSize"], data["Units"][3]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Diva/divaatk08.png').convert_alpha(), (data["Units"][3]["UnitSize"], data["Units"][3]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Diva/divaatk08.png').convert_alpha(), (data["Units"][3]["UnitSize"], data["Units"][3]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Diva/divaatk09.png').convert_alpha(), (data["Units"][3]["UnitSize"], data["Units"][3]["UnitSize"])),
+                                ]
+                
+    DivaPost = [pygame.transform.scale(pygame.image.load('Diva/divaatk10.png').convert_alpha(), (data["Units"][3]["UnitSize"], data["Units"][3]["UnitSize"])),
+                    pygame.transform.scale(pygame.image.load('Diva/divaatk11.png').convert_alpha(), (data["Units"][3]["UnitSize"], data["Units"][3]["UnitSize"])),
+                    pygame.transform.scale(pygame.image.load('Diva/divaatk12.png').convert_alpha(), (data["Units"][3]["UnitSize"], data["Units"][3]["UnitSize"])),
+                    pygame.transform.scale(pygame.image.load('Diva/divaatk13.png').convert_alpha(), (data["Units"][3]["UnitSize"], data["Units"][3]["UnitSize"])),
+                    pygame.transform.scale(pygame.image.load('Diva/divaatk14.png').convert_alpha(), (data["Units"][3]["UnitSize"], data["Units"][3]["UnitSize"])),
+                    pygame.transform.scale(pygame.image.load('Diva/divaatk14.png').convert_alpha(), (data["Units"][3]["UnitSize"], data["Units"][3]["UnitSize"])),
+                    pygame.transform.scale(pygame.image.load('Diva/divaatk15.png').convert_alpha(), (data["Units"][3]["UnitSize"], data["Units"][3]["UnitSize"])),                                              
+                    pygame.transform.scale(pygame.image.load('Diva/divaatk15.png').convert_alpha(), (data["Units"][3]["UnitSize"], data["Units"][3]["UnitSize"])),                           
+                    pygame.transform.scale(pygame.image.load('Diva/divaatk16.png').convert_alpha(), (data["Units"][3]["UnitSize"], data["Units"][3]["UnitSize"]))]                       
+                    
 
-    WalkAnimations = [JohnWalk,CatWalk,TankWalk]
-    AtkAnimations = [JohnAtk,CatAtk,TankAtk]
-    PostAnimations = [JohnPost,CatPost,TankPost]
+    WalkAnimations = [JohnWalk,CatWalk,TankWalk,DivaWalk]
+    AtkAnimations = [JohnAtk,CatAtk,TankAtk,DivaAtk]
+    PostAnimations = [JohnPost,CatPost,TankPost,DivaPost]
 
     def __init__(self,data):
         self.UnitX = 0
@@ -88,3 +122,6 @@ class Unit:
 
     def drawStand(self):
         return self.AtkAnimations[self.UnitType][0]
+
+    def spawn(self):
+        self.Range = data["Units"][self.UnitType]["UnitRange"] + random.randint(-2, 2)
