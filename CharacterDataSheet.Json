@@ -53,16 +53,16 @@
         },
         {
             "Name": "Diva",
-            "UnitHealth":150,
+            "UnitHealth":100,
             "UnitSpeed":6,
-            "UnitRange":100,
+            "UnitRange":110,
             "UnitSize":200,
-            "UnitBlindspot":35,
+            "UnitBlindspot":45,
             "UnitPierce":0,
-            "UnitCooldown":10,
-            "UnitAtkCooldown":3,
-            "UnitPrice":150,
-            "UnitDamage":30,
+            "UnitCooldown":7,
+            "UnitAtkCooldown":5,
+            "UnitPrice":350,
+            "UnitDamage":100,
             "UnitPause": "True",
             "UnitAttackType": "Single"
            
@@ -71,8 +71,8 @@
         ,
         {
             "Name": "Bomb",
-            "UnitHealth":100,
-            "UnitSpeed":6,
+            "UnitHealth":75,
+            "UnitSpeed":2,
             "UnitRange":150,
             "UnitSize":250,
             "UnitBlindspot":0,
@@ -81,6 +81,23 @@
             "UnitAtkCooldown":0,
             "UnitPrice":500,
             "UnitDamage":45,
+            "UnitPause": "False",
+            "UnitAttackType": "Area"
+           
+
+        },
+        {
+            "Name": "TankMan",
+            "UnitHealth":1000,
+            "UnitSpeed":3,
+            "UnitRange":65,
+            "UnitSize":300,
+            "UnitBlindspot":0,
+            "UnitPierce":10,
+            "UnitCooldown":20,
+            "UnitAtkCooldown":5,
+            "UnitPrice":750,
+            "UnitDamage":10,
             "UnitPause": "False",
             "UnitAttackType": "Area"
            

@@ -122,11 +122,52 @@ class Unit:
                 pygame.transform.scale(pygame.image.load('Bomb/bombatk17.png').convert_alpha(), (data["Units"][4]["UnitSize"], data["Units"][4]["UnitSize"])),
                 pygame.transform.scale(pygame.image.load('Bomb/bombatk18.png').convert_alpha(), (data["Units"][4]["UnitSize"], data["Units"][4]["UnitSize"])),
                 pygame.transform.scale(pygame.image.load('Bomb/bombatk19.png').convert_alpha(), (data["Units"][4]["UnitSize"], data["Units"][4]["UnitSize"]))]                       
+ #######################################
+ # 
+    TankmanWalk = [pygame.transform.scale(pygame.image.load('Tankman/tankman0.png').convert_alpha(), (data["Units"][5]["UnitSize"], data["Units"][5]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Tankman/tankman1.png').convert_alpha(), (data["Units"][5]["UnitSize"], data["Units"][5]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Tankman/tankman2.png').convert_alpha(), (data["Units"][5]["UnitSize"], data["Units"][5]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Tankman/tankman3.png').convert_alpha(), (data["Units"][5]["UnitSize"], data["Units"][5]["UnitSize"]))]
                     
+    TankmanAtk = [pygame.transform.scale(pygame.image.load('Tankman/tankmanatk00.png').convert_alpha(), (data["Units"][5]["UnitSize"], data["Units"][5]["UnitSize"])),
+                  pygame.transform.scale(pygame.image.load('Tankman/tankmanatk01.png').convert_alpha(), (data["Units"][5]["UnitSize"], data["Units"][5]["UnitSize"])),
+                  pygame.transform.scale(pygame.image.load('Tankman/tankmanatk02.png').convert_alpha(), (data["Units"][5]["UnitSize"], data["Units"][5]["UnitSize"])),
+                  pygame.transform.scale(pygame.image.load('Tankman/tankmanatk03.png').convert_alpha(), (data["Units"][5]["UnitSize"], data["Units"][5]["UnitSize"])),
+                  pygame.transform.scale(pygame.image.load('Tankman/tankmanatk04.png').convert_alpha(), (data["Units"][5]["UnitSize"], data["Units"][5]["UnitSize"])),
+                  pygame.transform.scale(pygame.image.load('Tankman/tankmanatk05.png').convert_alpha(), (data["Units"][5]["UnitSize"], data["Units"][5]["UnitSize"])),
+                  pygame.transform.scale(pygame.image.load('Tankman/tankmanatk06.png').convert_alpha(), (data["Units"][5]["UnitSize"], data["Units"][5]["UnitSize"])),
+                  pygame.transform.scale(pygame.image.load('Tankman/tankmanatk07.png').convert_alpha(), (data["Units"][5]["UnitSize"], data["Units"][5]["UnitSize"])),
+                  pygame.transform.scale(pygame.image.load('Tankman/tankmanatk08.png').convert_alpha(), (data["Units"][5]["UnitSize"], data["Units"][5]["UnitSize"])),
+                  pygame.transform.scale(pygame.image.load('Tankman/tankmanatk09.png').convert_alpha(), (data["Units"][5]["UnitSize"], data["Units"][5]["UnitSize"])),
+                  pygame.transform.scale(pygame.image.load('Tankman/tankmanatk09.png').convert_alpha(), (data["Units"][5]["UnitSize"], data["Units"][5]["UnitSize"])),
+                  pygame.transform.scale(pygame.image.load('Tankman/tankmanatk09.png').convert_alpha(), (data["Units"][5]["UnitSize"], data["Units"][5]["UnitSize"])),
+                  pygame.transform.scale(pygame.image.load('Tankman/tankmanatk09.png').convert_alpha(), (data["Units"][5]["UnitSize"], data["Units"][5]["UnitSize"])),
+                  pygame.transform.scale(pygame.image.load('Tankman/tankmanatk09.png').convert_alpha(), (data["Units"][5]["UnitSize"], data["Units"][5]["UnitSize"])),
+                  pygame.transform.scale(pygame.image.load('Tankman/tankmanatk09.png').convert_alpha(), (data["Units"][5]["UnitSize"], data["Units"][5]["UnitSize"])),
+                  pygame.transform.scale(pygame.image.load('Tankman/tankmanatk09.png').convert_alpha(), (data["Units"][5]["UnitSize"], data["Units"][5]["UnitSize"])),
+                  pygame.transform.scale(pygame.image.load('Tankman/tankmanatk10.png').convert_alpha(), (data["Units"][5]["UnitSize"], data["Units"][5]["UnitSize"])),
+                  pygame.transform.scale(pygame.image.load('Tankman/tankmanatk11.png').convert_alpha(), (data["Units"][5]["UnitSize"], data["Units"][5]["UnitSize"])),
+                  pygame.transform.scale(pygame.image.load('Tankman/tankmanatk12.png').convert_alpha(), (data["Units"][5]["UnitSize"], data["Units"][5]["UnitSize"])),
+                  pygame.transform.scale(pygame.image.load('Tankman/tankmanatk13.png').convert_alpha(), (data["Units"][5]["UnitSize"], data["Units"][5]["UnitSize"])),]
+    TankmanPost = [pygame.transform.scale(pygame.image.load('Tankman/tankmanatk13.png').convert_alpha(), (data["Units"][5]["UnitSize"], data["Units"][5]["UnitSize"])),
+                   pygame.transform.scale(pygame.image.load('Tankman/tankmanatk13.png').convert_alpha(), (data["Units"][5]["UnitSize"], data["Units"][5]["UnitSize"])),
+                   pygame.transform.scale(pygame.image.load('Tankman/tankmanatk13.png').convert_alpha(), (data["Units"][5]["UnitSize"], data["Units"][5]["UnitSize"])),
+                   pygame.transform.scale(pygame.image.load('Tankman/tankmanatk13.png').convert_alpha(), (data["Units"][5]["UnitSize"], data["Units"][5]["UnitSize"])),
+                   pygame.transform.scale(pygame.image.load('Tankman/tankmanatk13.png').convert_alpha(), (data["Units"][5]["UnitSize"], data["Units"][5]["UnitSize"])),
+                   pygame.transform.scale(pygame.image.load('Tankman/tankmanatk13.png').convert_alpha(), (data["Units"][5]["UnitSize"], data["Units"][5]["UnitSize"])),
+                   pygame.transform.scale(pygame.image.load('Tankman/tankmanatk13.png').convert_alpha(), (data["Units"][5]["UnitSize"], data["Units"][5]["UnitSize"])),
+                   pygame.transform.scale(pygame.image.load('Tankman/tankmanatk13.png').convert_alpha(), (data["Units"][5]["UnitSize"], data["Units"][5]["UnitSize"])),
+                   pygame.transform.scale(pygame.image.load('Tankman/tankmanatk14.png').convert_alpha(), (data["Units"][5]["UnitSize"], data["Units"][5]["UnitSize"])),
+                   pygame.transform.scale(pygame.image.load('Tankman/tankmanatk15.png').convert_alpha(), (data["Units"][5]["UnitSize"], data["Units"][5]["UnitSize"])),
+                   pygame.transform.scale(pygame.image.load('Tankman/tankmanatk16.png').convert_alpha(), (data["Units"][5]["UnitSize"], data["Units"][5]["UnitSize"])),
+                   pygame.transform.scale(pygame.image.load('Tankman/tankmanatk17.png').convert_alpha(), (data["Units"][5]["UnitSize"], data["Units"][5]["UnitSize"])),
+                   pygame.transform.scale(pygame.image.load('Tankman/tankmanatk18.png').convert_alpha(), (data["Units"][5]["UnitSize"], data["Units"][5]["UnitSize"])),
+                   pygame.transform.scale(pygame.image.load('Tankman/tankmanatk19.png').convert_alpha(), (data["Units"][5]["UnitSize"], data["Units"][5]["UnitSize"])),]
+                        
 
-    WalkAnimations = [JohnWalk,CatWalk,TankWalk,DivaWalk,BombWalk]
-    AtkAnimations = [JohnAtk,CatAtk,TankAtk,DivaAtk,BombAtk]
-    PostAnimations = [JohnPost,CatPost,TankPost,DivaPost,BombPost]
+    WalkAnimations = [JohnWalk,CatWalk,TankWalk,DivaWalk,BombWalk,TankmanWalk]
+    AtkAnimations = [JohnAtk,CatAtk,TankAtk,DivaAtk,BombAtk,TankmanAtk]
+    PostAnimations = [JohnPost,CatPost,TankPost,DivaPost,BombPost,TankmanPost]
 
     def __init__(self,data):
         self.UnitX = 0
