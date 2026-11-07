@@ -103,6 +103,24 @@
            
 
         }
+        ,
+        {
+            "Name": "Fish",
+            "UnitHealth":200,
+            "UnitSpeed":3,
+            "UnitRange":220,
+            "UnitSize":400,
+            "UnitBlindspot":110,
+            "UnitPierce":50,
+            "UnitCooldown":45,
+            "UnitAtkCooldown":5,
+            "UnitPrice":1250,
+            "UnitDamage":300,
+            "UnitPause": "False",
+            "UnitAttackType": "Area"
+           
+
+        }
 
     ],
     "Enemy":[

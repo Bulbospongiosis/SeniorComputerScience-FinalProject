@@ -165,9 +165,64 @@ class Unit:
                    pygame.transform.scale(pygame.image.load('Tankman/tankmanatk19.png').convert_alpha(), (data["Units"][5]["UnitSize"], data["Units"][5]["UnitSize"])),]
                         
 
-    WalkAnimations = [JohnWalk,CatWalk,TankWalk,DivaWalk,BombWalk,TankmanWalk]
-    AtkAnimations = [JohnAtk,CatAtk,TankAtk,DivaAtk,BombAtk,TankmanAtk]
-    PostAnimations = [JohnPost,CatPost,TankPost,DivaPost,BombPost,TankmanPost]
+###################################
+
+    FishWalk = [pygame.transform.scale(pygame.image.load('Fish/fish0.png').convert_alpha(), (data["Units"][6]["UnitSize"], data["Units"][6]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Fish/fish1.png').convert_alpha(), (data["Units"][6]["UnitSize"], data["Units"][6]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Fish/fish2.png').convert_alpha(), (data["Units"][6]["UnitSize"], data["Units"][6]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Fish/fish3.png').convert_alpha(), (data["Units"][6]["UnitSize"], data["Units"][6]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Fish/fish4.png').convert_alpha(), (data["Units"][6]["UnitSize"], data["Units"][6]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Fish/fish5.png').convert_alpha(), (data["Units"][6]["UnitSize"], data["Units"][6]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Fish/fish6.png').convert_alpha(), (data["Units"][6]["UnitSize"], data["Units"][6]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Fish/fish7.png').convert_alpha(), (data["Units"][6]["UnitSize"], data["Units"][6]["UnitSize"]))]
+    FishAtk = [pygame.transform.scale(pygame.image.load('Fish/fishatk00.png').convert_alpha(), (data["Units"][6]["UnitSize"], data["Units"][6]["UnitSize"])),
+               pygame.transform.scale(pygame.image.load('Fish/fishatk01.png').convert_alpha(), (data["Units"][6]["UnitSize"], data["Units"][6]["UnitSize"])),
+               pygame.transform.scale(pygame.image.load('Fish/fishatk02.png').convert_alpha(), (data["Units"][6]["UnitSize"], data["Units"][6]["UnitSize"])),
+               pygame.transform.scale(pygame.image.load('Fish/fishatk03.png').convert_alpha(), (data["Units"][6]["UnitSize"], data["Units"][6]["UnitSize"])),
+               pygame.transform.scale(pygame.image.load('Fish/fishatk04.png').convert_alpha(), (data["Units"][6]["UnitSize"], data["Units"][6]["UnitSize"])),
+               pygame.transform.scale(pygame.image.load('Fish/fishatk05.png').convert_alpha(), (data["Units"][6]["UnitSize"], data["Units"][6]["UnitSize"])),
+               pygame.transform.scale(pygame.image.load('Fish/fishatk06.png').convert_alpha(), (data["Units"][6]["UnitSize"], data["Units"][6]["UnitSize"])),
+               pygame.transform.scale(pygame.image.load('Fish/fishatk07.png').convert_alpha(), (data["Units"][6]["UnitSize"], data["Units"][6]["UnitSize"])),
+               pygame.transform.scale(pygame.image.load('Fish/fishatk08.png').convert_alpha(), (data["Units"][6]["UnitSize"], data["Units"][6]["UnitSize"])),
+               pygame.transform.scale(pygame.image.load('Fish/fishatk09.png').convert_alpha(), (data["Units"][6]["UnitSize"], data["Units"][6]["UnitSize"])),
+               pygame.transform.scale(pygame.image.load('Fish/fishatk09.png').convert_alpha(), (data["Units"][6]["UnitSize"], data["Units"][6]["UnitSize"])),
+               pygame.transform.scale(pygame.image.load('Fish/fishatk09.png').convert_alpha(), (data["Units"][6]["UnitSize"], data["Units"][6]["UnitSize"])),
+               pygame.transform.scale(pygame.image.load('Fish/fishatk09.png').convert_alpha(), (data["Units"][6]["UnitSize"], data["Units"][6]["UnitSize"])),
+               pygame.transform.scale(pygame.image.load('Fish/fishatk09.png').convert_alpha(), (data["Units"][6]["UnitSize"], data["Units"][6]["UnitSize"])),
+               pygame.transform.scale(pygame.image.load('Fish/fishatk09.png').convert_alpha(), (data["Units"][6]["UnitSize"], data["Units"][6]["UnitSize"])),
+               pygame.transform.scale(pygame.image.load('Fish/fishatk10.png').convert_alpha(), (data["Units"][6]["UnitSize"], data["Units"][6]["UnitSize"])),
+               pygame.transform.scale(pygame.image.load('Fish/fishatk11.png').convert_alpha(), (data["Units"][6]["UnitSize"], data["Units"][6]["UnitSize"])),
+               pygame.transform.scale(pygame.image.load('Fish/fishatk12.png').convert_alpha(), (data["Units"][6]["UnitSize"], data["Units"][6]["UnitSize"])),
+               pygame.transform.scale(pygame.image.load('Fish/fishatk13.png').convert_alpha(), (data["Units"][6]["UnitSize"], data["Units"][6]["UnitSize"])),
+               pygame.transform.scale(pygame.image.load('Fish/fishatk14.png').convert_alpha(), (data["Units"][6]["UnitSize"], data["Units"][6]["UnitSize"])),
+               pygame.transform.scale(pygame.image.load('Fish/fishatk15.png').convert_alpha(), (data["Units"][6]["UnitSize"], data["Units"][6]["UnitSize"])),
+               pygame.transform.scale(pygame.image.load('Fish/fishatk16.png').convert_alpha(), (data["Units"][6]["UnitSize"], data["Units"][6]["UnitSize"])),]
+    FishPost = [pygame.transform.scale(pygame.image.load('Fish/fishatk17.png').convert_alpha(), (data["Units"][6]["UnitSize"], data["Units"][6]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Fish/fishatk18.png').convert_alpha(), (data["Units"][6]["UnitSize"], data["Units"][6]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Fish/fishatk19.png').convert_alpha(), (data["Units"][6]["UnitSize"], data["Units"][6]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Fish/fishatk20.png').convert_alpha(), (data["Units"][6]["UnitSize"], data["Units"][6]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Fish/fishatk21.png').convert_alpha(), (data["Units"][6]["UnitSize"], data["Units"][6]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Fish/fishatk22.png').convert_alpha(), (data["Units"][6]["UnitSize"], data["Units"][6]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Fish/fishatk23.png').convert_alpha(), (data["Units"][6]["UnitSize"], data["Units"][6]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Fish/fishatk24.png').convert_alpha(), (data["Units"][6]["UnitSize"], data["Units"][6]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Fish/fishatk25.png').convert_alpha(), (data["Units"][6]["UnitSize"], data["Units"][6]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Fish/fishatk26.png').convert_alpha(), (data["Units"][6]["UnitSize"], data["Units"][6]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Fish/fishatk27.png').convert_alpha(), (data["Units"][6]["UnitSize"], data["Units"][6]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Fish/fishatk28.png').convert_alpha(), (data["Units"][6]["UnitSize"], data["Units"][6]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Fish/fishatk29.png').convert_alpha(), (data["Units"][6]["UnitSize"], data["Units"][6]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Fish/fishatk30.png').convert_alpha(), (data["Units"][6]["UnitSize"], data["Units"][6]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Fish/fishatk30.png').convert_alpha(), (data["Units"][6]["UnitSize"], data["Units"][6]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Fish/fishatk30.png').convert_alpha(), (data["Units"][6]["UnitSize"], data["Units"][6]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Fish/fishatk30.png').convert_alpha(), (data["Units"][6]["UnitSize"], data["Units"][6]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Fish/fishatk31.png').convert_alpha(), (data["Units"][6]["UnitSize"], data["Units"][6]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Fish/fishatk32.png').convert_alpha(), (data["Units"][6]["UnitSize"], data["Units"][6]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Fish/fishatk33.png').convert_alpha(), (data["Units"][6]["UnitSize"], data["Units"][6]["UnitSize"])),
+                pygame.transform.scale(pygame.image.load('Fish/fishatk34.png').convert_alpha(), (data["Units"][6]["UnitSize"], data["Units"][6]["UnitSize"])),]
+    
+
+    WalkAnimations = [JohnWalk,CatWalk,TankWalk,DivaWalk,BombWalk,TankmanWalk,FishWalk]
+    AtkAnimations = [JohnAtk,CatAtk,TankAtk,DivaAtk,BombAtk,TankmanAtk,FishAtk]
+    PostAnimations = [JohnPost,CatPost,TankPost,DivaPost,BombPost,TankmanPost,FishPost]
 
     def __init__(self,data):
         self.UnitX = 0
