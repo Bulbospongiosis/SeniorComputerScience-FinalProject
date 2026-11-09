@@ -6,7 +6,7 @@ import math
 import json
 from logic import UnitOperations, EnemyOperations
 from visuals import Draw, DrawButtons, textplacement
-from menu import menuappear
+from menu import menuappear, ShiftInputLeft, ShiftInputRight,ApplyInput
 from Unit import Unit
 from Enemy import Enemy
 
@@ -43,7 +43,7 @@ for i in range(UnitCount):
     Units.append(Unit(data))
 
 Cooldown = [999999999999999999] * 10
-AssignedButtonTypes = [1,2,3,4,5,6,0,0,0,0]
+AssignedButtonTypes = [-1] * 10
 ButtonError = [False] * 10
 ErrorCooldown = [0] * 10
 JewButtonError = False
@@ -82,12 +82,12 @@ JewButton = JewButtonSetup.get_rect(topleft=(900+25,500+25))
 StartButtonSetup = pygame.transform.scale(pygame.image.load('__Pngs__/Startbutton.png').convert_alpha(), (240, 240))
 StartButton = StartButtonSetup.get_rect(topleft=(900+25,500+25))
 UnitButtonSetup = [pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (150, 100)),
-                   pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (150, 100)),
-                   pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (150, 100)),
-                   pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (150, 100)),
-                   pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (150, 100)),
-                   pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (150, 100)),
-                   pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (150, 100)),
+                   pygame.transform.scale(pygame.image.load('__Pngs__/CatButton.png').convert_alpha(), (150, 100)),
+                   pygame.transform.scale(pygame.image.load('__Pngs__/TankButton.png').convert_alpha(), (150, 100)),
+                   pygame.transform.scale(pygame.image.load('__Pngs__/DivaButton.png').convert_alpha(), (150, 100)),
+                   pygame.transform.scale(pygame.image.load('__Pngs__/BombButton.png').convert_alpha(), (150, 100)),
+                   pygame.transform.scale(pygame.image.load('__Pngs__/TankmanButton.png').convert_alpha(), (150, 100)),
+                   pygame.transform.scale(pygame.image.load('__Pngs__/FishButton.png').convert_alpha(), (150, 100)),
                    pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (150, 100)),
                    pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (150, 100)),
                    pygame.transform.scale(pygame.image.load('__Pngs__/cat.png').convert_alpha(), (150, 100)),
@@ -214,6 +214,8 @@ PlayMusic()
 StatReset()
 menu = True
 running = True
+nextAvailableButton = 0
+input_index = 0
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -231,6 +233,17 @@ while running:
         if event.type == pygame.KEYDOWN:
             if not menu and event.unicode.isdigit():
                 Button((-100,-100),True,int(event.unicode))
+            if event.key == pygame.K_LEFT and menu:
+                if input_index > 0:
+                    input_index -= 1
+                print("shift left")
+            if event.key == pygame.K_RIGHT and menu:
+                if input_index < len(UnitButtonSetup) - 2:
+                    input_index += 1
+                print(input_index)
+            if event.key == pygame.K_SPACE and menu:
+                nextAvailableButton = ApplyInput(nextAvailableButton,AssignedButtonTypes,input_index)
+        
 
 
     if not menu:
@@ -245,7 +258,7 @@ while running:
     else:
         pygame.mixer.music.pause()
 
-        menuappear(AssignedButtonTypes,data,screen,background)
+        menuappear(AssignedButtonTypes,data,screen,background,UnitButtonSetup,input_index)
 
         DrawButtons(screen,UnitButton,UnitButtonSetup,ButtonError,Cooldown,data,FrameRate,AssignedButtonTypes,JewButtonError,JewButtonSetup,False,StartButtonSetup)
 
