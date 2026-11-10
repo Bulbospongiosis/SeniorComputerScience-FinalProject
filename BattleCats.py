@@ -54,7 +54,7 @@ EnemyBaseHealth = 5000
 EnemyY = HEIGHT - 275
 Enemies = []
 for i in range(EnemyCount):
-    Enemies.append(Enemy())
+    Enemies.append(Enemy(data))
 
 
 

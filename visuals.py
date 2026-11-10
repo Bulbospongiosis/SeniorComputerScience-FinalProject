@@ -28,9 +28,9 @@ def DrawPlaceholders(UnitCount,Units,screen,Enemies,data,EnemyY,EnemyCount,UnitY
             
     for i in range(EnemyCount):
         if Enemies[i].EnemyX < WIDTH:
-    
-            pygame.draw.rect(screen,BLACK,(Enemies[i].EnemyX,EnemyY - data["Enemy"][Enemies[i].EnemyType]["EnemySize"],data["Enemy"][Enemies[i].EnemyType]["EnemySize"],data["Enemy"][Enemies[i].EnemyType]["EnemySize"]))
-
+            pygame.draw.rect(screen,RED,(Enemies[i].EnemyX - data["Enemy"][Enemies[i].EnemyType]["EnemyBlindspot"],EnemyY,5,5))
+            pygame.draw.rect(screen,BLACK,(Enemies[i].EnemyX,EnemyY,5,5))
+            pygame.draw.rect(screen,GREEN,(Enemies[i].EnemyX - Enemies[i].Range - data["Enemy"][Enemies[i].EnemyType]["EnemyPierce"],EnemyY,5,5))
 def DrawButtons(screen,UnitButton,UnitButtonSetup,ButtonError,Cooldown,data,FrameRate,AssignedButtonTypes,JewButtonError,JewButtonSetup,Playing,StartButtonSetup):
     pygame.draw.rect(screen,BLACK,(90,515,770,220))
     for i in range(5):

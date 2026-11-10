@@ -10,6 +10,8 @@ def UnitOperations(UnitCount,Units,data,FrameRate,EnemyCount,Enemies,EnemyBaseHe
                             
         if Units[i].UnitHealth <= 0:
             Units[i].UnitX = 0
+            Units[i].UnitType = 0
+            Units[i].spawn()
         if Units[i].UnitCooldown >= 0:
             Units[i].UnitCooldown -= 1
         if (Units[i].UnitCooldown <= 0 and data["Units"][Units[i].UnitType]["UnitPause"] == "True") or (data["Units"][Units[i].UnitType]["UnitPause"] == "False" and Units[i].UnitPostAnimation >= max_post_ticks - 1):
@@ -72,17 +74,26 @@ def UnitOperations(UnitCount,Units,data,FrameRate,EnemyCount,Enemies,EnemyBaseHe
                 Units[i].UnitPostAnimation += 1
                                     
 
+
 def EnemyOperations(EnemyCount,Enemies,data,FrameRate,UnitCount,Units,UnitBaseHealth,Money,screen,EnemyY):
     for i in range(EnemyCount):
-        enemySize = (Enemies[i].EnemyX, EnemyY - data["Enemy"][Enemies[i].EnemyType]["EnemySize"])
+        enemySize = (Enemies[i].EnemyX - Enemies[i].Range - data["Enemy"][Enemies[i].EnemyType]["EnemyPierce"], EnemyY - data["Enemy"][Enemies[i].EnemyType]["EnemySize"])
+        ticks_per_frame = max(1, FrameRate // 12)
+        max_post_ticks = len(Enemies[i].EnemyPostAnimations[Enemies[i].EnemyType]) * ticks_per_frame
+
         if Enemies[i].EnemyHealth <= 0:
             if Enemies[i].EnemyX < WIDTH:
                 Money += data["Enemy"][Enemies[i].EnemyType]["EnemyHealth"]
             Enemies[i].EnemyX = WIDTH
+            Enemies[i].EnemyType = 0
+            Enemies[i].spawn()
+
+
         if Enemies[i].EnemyCooldown >= 0:
             Enemies[i].EnemyCooldown -= 1
-        if (Enemies[i].EnemyCooldown <= 0 and data["Enemy"][Enemies[i].EnemyType]["EnemyPause"] == "True") or data["Enemy"][Enemies[i].EnemyType]["EnemyPause"] == "False":
-            if (Enemies[i].EnemyX + 50 > data["Enemy"][Enemies[i].EnemyType]["EnemyRange"] and abs(Enemies[i].EnemyX - FrontmostUnit(Units,UnitCount)) > data["Enemy"][Enemies[i].EnemyType]["EnemyRange"]) and Enemies[i].EnemyX < WIDTH:
+
+        if (Enemies[i].EnemyCooldown <= 0 and data["Enemy"][Enemies[i].EnemyType]["EnemyPause"] == "True") or (data["Enemy"][Enemies[i].EnemyType]["EnemyPause"] == "False" and Enemies[i].EnemyPostAnimation >= max_post_ticks - 1):
+            if (Enemies[i].EnemyX - 120 > data["Enemy"][Enemies[i].EnemyType]["EnemyRange"] and abs(Enemies[i].EnemyX - FrontmostUnit(Units,UnitCount)) > data["Enemy"][Enemies[i].EnemyType]["EnemyRange"]) and Enemies[i].EnemyX < WIDTH:
 
                 Enemies[i].EnemyX -= data["Enemy"][Enemies[i].EnemyType]["EnemySpeed"]*24/FrameRate
                 Enemies[i].EnemyAtkAnimation = 0
@@ -90,28 +101,30 @@ def EnemyOperations(EnemyCount,Enemies,data,FrameRate,UnitCount,Units,UnitBaseHe
                 Enemies[i].EnemyAnimation = (Enemies[i].EnemyAnimation + 1) % max_ticks
                 screen.blit(Enemies[i].drawWalk(),enemySize)
 
-
             elif Enemies[i].EnemyX < WIDTH:
 
                 if Enemies[i].EnemyCooldown <= 0:
                     ticks_per_frame = max(1, FrameRate // 12)
                     max_atk_ticks = len(Enemies[i].EnemyAtkAnimations[Enemies[i].EnemyType]) * ticks_per_frame
+
                     if Enemies[i].EnemyAtkAnimation >= max_atk_ticks - 1:
                         Enemies[i].EnemyCooldown = data["Enemy"][Enemies[i].EnemyType]["EnemyAtkCooldown"]*FrameRate
                         Enemies[i].EnemyAtkAnimation = 0
-                        screen.blit(Enemies[i].drawStand(),enemySize)
-
+                        Enemies[i].EnemyPostAnimation = 0
+                        screen.blit(Enemies[i].drawPost(),enemySize)
 
                         if data["Enemy"][Enemies[i].EnemyType]["EnemyAttackType"] == "Area":
-                            if Enemies[i].EnemyX + 50 <= data["Enemy"][Enemies[i].EnemyType]["EnemyRange"]:
+                            if Enemies[i].EnemyX - 50 <= data["Enemy"][Enemies[i].EnemyType]["EnemyRange"]:
                                 UnitBaseHealth -= data["Enemy"][Enemies[i].EnemyType]["EnemyDamage"]
+
                             for j in range(UnitCount):
                                 if Units[j].UnitX >= Enemies[i].EnemyX - data["Enemy"][Enemies[i].EnemyType]["EnemyRange"] - data["Enemy"][Enemies[i].EnemyType]["EnemyPierce"] and Units[j].UnitX <= Enemies[i].EnemyX - data["Enemy"][Enemies[i].EnemyType]["EnemyBlindspot"]:
                                     Units[j].UnitHealth -= data["Enemy"][Enemies[i].EnemyType]["EnemyDamage"]
 
                         elif data["Enemy"][Enemies[i].EnemyType]["EnemyAttackType"] == "Single":
-                            if Enemies[i].EnemyX + 50 <= data["Enemy"][Enemies[i].EnemyType]["EnemyRange"] and FrontmostUnit(Units,UnitCount) < 50:
+                            if Enemies[i].EnemyX - 50 <= data["Enemy"][Enemies[i].EnemyType]["EnemyRange"] and FrontmostUnit(Units,UnitCount) < 50:
                                 UnitBaseHealth -= data["Enemy"][Enemies[i].EnemyType]["EnemyDamage"]
+
                             for j in range(UnitCount):
                                 if Units[j].UnitX >= Enemies[i].EnemyX - data["Enemy"][Enemies[i].EnemyType]["EnemyRange"] - data["Enemy"][Enemies[i].EnemyType]["EnemyPierce"] and Units[j].UnitX <= Enemies[i].EnemyX - data["Enemy"][Enemies[i].EnemyType]["EnemyBlindspot"]:
                                     if Units[j].UnitX == FrontmostUnit(Units,UnitCount):
@@ -124,12 +137,23 @@ def EnemyOperations(EnemyCount,Enemies,data,FrameRate,UnitCount,Units,UnitBaseHe
                         screen.blit(Enemies[i].drawAtk(),enemySize)
 
                 else:
-                    Enemies[i].EnemyAtkAnimation = 0
-                    screen.blit(Enemies[i].drawStand(),enemySize)
+                    if Enemies[i].EnemyPostAnimation >= max_post_ticks - 1:
+                        Enemies[i].EnemyAtkAnimation = 0
+                        screen.blit(Enemies[i].drawStand(),enemySize)
+                    else:
+                        screen.blit(Enemies[i].drawPost(),enemySize)
+                        Enemies[i].EnemyPostAnimation += 1
+
         else:
-            Enemies[i].EnemyAtkAnimation = 0
-            screen.blit(Enemies[i].drawStand(),enemySize)
+            if Enemies[i].EnemyPostAnimation >= max_post_ticks - 1:
+                Enemies[i].EnemyAtkAnimation = 0
+                screen.blit(Enemies[i].drawStand(),enemySize)
+            else:
+                screen.blit(Enemies[i].drawPost(),enemySize)
+                Enemies[i].EnemyPostAnimation += 1
+
     return Money
+
 
 
 

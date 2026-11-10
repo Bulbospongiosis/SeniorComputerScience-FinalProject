@@ -2,16 +2,16 @@
     "Units":[
         {
             "Name": "John",
-            "UnitHealth":25,
-            "UnitSpeed":40,
-            "UnitRange":20,
-            "UnitSize":20,
+            "UnitHealth":10,
+            "UnitSpeed":0,
+            "UnitRange":0,
+            "UnitSize":0,
             "UnitBlindspot":0,
             "UnitPierce":0,
-            "UnitCooldown":10,
-            "UnitAtkCooldown":10,
-            "UnitPrice":100,
-            "UnitDamage":100,
+            "UnitCooldown":0,
+            "UnitAtkCooldown":0,
+            "UnitPrice":0,
+            "UnitDamage":0,
             "UnitPause": "True",
             "UnitAttackType": "Single"
            
@@ -126,16 +126,13 @@
     "Enemy":[
         {
             "EnemyHealth":100,
-            "EnemyWalkFrames":12,
-            "EnemyAtkFrames":5,
             "EnemySpeed":5,
-            "EnemyRange":5,
+            "EnemyRange":50,
             "EnemySize":50, 
-            "EnemyBlindspot":0,
-            "EnemyPierce":0,
+            "EnemyBlindspot":10,
+            "EnemyPierce":10,
             "EnemyCooldown":3,
             "EnemyAtkCooldown":1,
-            "EnemyPrice":10,
             "EnemyDamage":1,
             "EnemyPause": "False",
             "EnemyAttackType": "Area"
