@@ -9,7 +9,7 @@ TITLE_FONT = pygame.font.SysFont("arial", 52, bold=True)
 HEADING_FONT = pygame.font.SysFont("arial", 25, bold=True)
 
 
-def menuappear(AssignedButtonTypes,data,screen,background,UnitButtonSetup,input_index):
+def menuappear(AssignedButtonTypes,data,screen,background,UnitButtonSetup,input_index,displayUnit):
     # Draw original background
     screen.blit(background, (0, 0))
 
@@ -29,7 +29,10 @@ def menuappear(AssignedButtonTypes,data,screen,background,UnitButtonSetup,input_
     # Character selection border
     pygame.draw.rect(screen, BLUE, (85, 510, 780, 232), 2)
 
-    screen.blit(pygame.transform.scale(UnitButtonSetup[input_index],(300,200)), ((WIDTH/2)-150,200))
+    screen.blit(displayUnit, ((WIDTH/2)-150,200))
+
+    pygame.draw.polygon(screen,WHITE,(((WIDTH/2)-250,200),((WIDTH/2)-250,400),((WIDTH/2)-400,300)))
+    pygame.draw.polygon(screen,WHITE,(((WIDTH/2)+250,200),((WIDTH/2)+250,400),((WIDTH/2)+400,300)))
 
 def ShiftInputLeft(input_index):
     

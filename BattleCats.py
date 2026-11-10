@@ -216,7 +216,11 @@ menu = True
 running = True
 nextAvailableButton = 0
 input_index = 0
+leftArrow = pygame.Rect((WIDTH/2)-400,200,150,200)
+rightArrow = pygame.Rect((WIDTH/2)+250,200,150,200)
 while running:
+    displayUnit = pygame.transform.scale(UnitButtonSetup[input_index],(300,200))
+    displayButton = displayUnit.get_rect(topleft=((WIDTH/2)-150,200))
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -227,6 +231,14 @@ while running:
                     menu = False
                     StatReset()
                     pygame.mixer.music.unpause()
+                if leftArrow.collidepoint(event.pos):
+                    if input_index > 0:
+                        input_index -= 1
+                if rightArrow.collidepoint(event.pos):
+                    if input_index < len(UnitButtonSetup) - 2:
+                        input_index += 1
+                if displayButton.collidepoint(event.pos):
+                    nextAvailableButton = ApplyInput(nextAvailableButton,AssignedButtonTypes,input_index)
             else:
                 Button(event.pos,False,-1000)
 
@@ -258,7 +270,7 @@ while running:
     else:
         pygame.mixer.music.pause()
 
-        menuappear(AssignedButtonTypes,data,screen,background,UnitButtonSetup,input_index)
+        menuappear(AssignedButtonTypes,data,screen,background,UnitButtonSetup,input_index,displayUnit)
 
         DrawButtons(screen,UnitButton,UnitButtonSetup,ButtonError,Cooldown,data,FrameRate,AssignedButtonTypes,JewButtonError,JewButtonSetup,False,StartButtonSetup)
 
