@@ -65,6 +65,7 @@ JewButtonLevel = 1
 
 NextAvailableUnit = 0
 NextAvailableEnemy = 0
+limitReached = False
 
 
 Level = "Hell"
@@ -116,9 +117,19 @@ UnitButton = [UnitButtonSetup[AssignedButtonTypes[0]].get_rect(topleft=(100 + 25
 
 
 def Button(position,numberclicked,unicode):
-    global JewButtonError, JewButtonLevel, JewButton, JewErrorCooldown, NextAvailableUnit, UnitButton, Cooldown, data, AssignedButtonTypes, FrameRate, Money, ButtonError, ErrorCooldown, MoneyLimit
+    global limitReached, JewButtonError, JewButtonLevel, JewButton, JewErrorCooldown, NextAvailableUnit, UnitButton, Cooldown, data, AssignedButtonTypes, FrameRate, Money, ButtonError, ErrorCooldown, MoneyLimit
+    NextAvailableUnit = min(NextAvailableUnit, UnitCount)
+
+    limitReached = True
+
+    for i in range(NextAvailableUnit, UnitCount):
+        if Units[i].UnitX == 0:
+            NextAvailableUnit = i
+            limitReached = False
+            break
+
     for i in range(len(UnitButton)):
-        if ErrorCooldown[i] <= 0 and (UnitButton[i].collidepoint(position) or (numberclicked and (unicode -1 == i or unicode + 9 == i))) and Cooldown[i] >= data["Units"][AssignedButtonTypes[i]]["UnitCooldown"] * FrameRate and Units[NextAvailableUnit].UnitX == 0 and Money >= data["Units"][AssignedButtonTypes[i]]["UnitPrice"]:
+        if limitReached == False and ErrorCooldown[i] <= 0 and (UnitButton[i].collidepoint(position) or (numberclicked and (unicode -1 == i or unicode + 9 == i))) and Cooldown[i] >= data["Units"][AssignedButtonTypes[i]]["UnitCooldown"] * FrameRate and Units[NextAvailableUnit].UnitX == 0 and Money >= data["Units"][AssignedButtonTypes[i]]["UnitPrice"]:
             Units[NextAvailableUnit].UnitX = 1
             Units[NextAvailableUnit].UnitType = AssignedButtonTypes[i]
             Cooldown[i] = 0
@@ -128,18 +139,19 @@ def Button(position,numberclicked,unicode):
             Units[NextAvailableUnit].UnitCooldown = 0
             Units[NextAvailableUnit].spawn()
             NextAvailableUnit += 1
-            while True:
-                if Units[NextAvailableUnit].UnitX == 0:
+
+            limitReached = True
+
+            for j in range(NextAvailableUnit, UnitCount):
+                if Units[j].UnitX == 0:
+                    NextAvailableUnit = j
+                    limitReached = False
                     break
-                else:
-                    if NextAvailableUnit != UnitCount -1:
-                        NextAvailableUnit += 1
-                    else:
-                        break
         else:
             if (UnitButton[i].collidepoint(position) or (numberclicked and (unicode -1 == i or unicode + 9 == i))):
                 ButtonError[i] = True
                 ErrorCooldown[i] = 0.15 * FrameRate
+            
     if JewButton.collidepoint(position) and Money >= MoneyLimit - 1500 and JewButtonLevel < 8:
         Money -= MoneyLimit - 1500
         MoneyLimit += 1500
@@ -148,6 +160,7 @@ def Button(position,numberclicked,unicode):
         if JewButton.collidepoint(position):
             JewButtonError = True
             JewErrorCooldown = 0.15 * FrameRate
+    
 
 
 
@@ -266,6 +279,11 @@ while running:
         DrawButtons(screen,UnitButton,UnitButtonSetup,ButtonError,Cooldown,data,FrameRate,AssignedButtonTypes,JewButtonError,JewButtonSetup,True,StartButtonSetup)
         Cooldowns()
         textplacement(screen,data,Money,MoneyLimit,JewButtonLevel)
+        if limitReached == True:
+                warningFont = pygame.font.SysFont("arial", 25, bold=True)
+                warning = warningFont.render("Unit Limit Reached!", True, RED)
+                screen.blit(warning, warning.get_rect(center=(WIDTH/2, 200)))
+        
 
     else:
         pygame.mixer.music.pause()
